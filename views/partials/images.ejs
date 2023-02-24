@@ -1,0 +1,13 @@
+<div class="image-container">
+    <% if(imgList){ %>
+        <% imgList.forEach(function(img){ %>
+            <div>
+                <img class="image-painting" src="<%= img.imgSrc %>" alt="ai generated image">
+                <p class="img-title"><%= img.title %></p>
+            </div>
+        <% }); %>
+    <% } %>
+</div>
+
+
+

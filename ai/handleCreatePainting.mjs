@@ -30,11 +30,13 @@ async function downloadImage(url, filepath) {
 
 export async function handleCreatePainting(prompt) {
     const response = await opeanai.createImage({
-        prompt: `${prompt} as photo`,
+        prompt: `${prompt} by Zdzislaw Beksinski`,
         n: 1,
         size: "512x512",
     });
     const filepath = path.join("public", "img", `${generateTitle(prompt)}.jpg`);
+    const fileSrc = path.join("img", `${generateTitle(prompt)}.jpg`);
     await downloadImage(response.data.data[0].url, filepath);
-    return {imgSrc: response.data.data[0].url, filepath};
+
+    return {imgSrc: response.data.data[0].url, fileSrc};
 }

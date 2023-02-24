@@ -15,16 +15,35 @@ export function handlePaintingsTable() {
     });
 }
 
-export function saveImgDataToDb(prompt,date,imgData) {
-    db.run(
-        `INSERT INTO paintings (title,date,imgSrc) VALUES (?,?,?)`,
-        [prompt, date, imgData.filepath],
-        function (err) {
-            if (err) {
-                return console.log(err.message);
+export function saveImgDataToDb(prompt, date, imgData) {
+
+    return new Promise((resolve, reject) => {
+        db.run(
+            `INSERT INTO paintings (title,date,imgSrc) VALUES (?,?,?)`,
+            [prompt, date, imgData.fileSrc],
+            function (err) {
+                if (err) {
+                    return reject(err)
+                }
+                console.log(`A row has been inserted with rowId ${this.lastID}`);
+                return resolve(imgData.fileSrc)
             }
-            console.log(`A row has been inserted with rowId ${this.lastID}`);
-        }
-    );
+        )
+    })
+}
+
+export function selectImagesByDate(date) {
+    return new Promise((resolve, reject) => {
+        db.all(
+            'SELECT * FROM paintings WHERE date = ?',
+            [date],
+            function (err, row) {
+                if (err) {
+                    return reject(err)
+                }
+                return resolve(row)
+            }
+        )
+    })
 }
 
