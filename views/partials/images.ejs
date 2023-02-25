@@ -1,9 +1,10 @@
-<div class="image-container">
+<div class="images-container">
     <% if(imgList){ %>
         <% imgList.forEach(function(img){ %>
-            <div>
+            <div class="image-container">
                 <img class="image-painting" src="<%= img.imgSrc %>" alt="ai generated image">
                 <p class="img-title"><%= img.title %></p>
+                <p class="news-src">New York Times</p>
             </div>
         <% }); %>
     <% } %>
