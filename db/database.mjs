@@ -16,7 +16,7 @@ export function handlePaintingsTable() {
 export function saveImgDataToDb(prompt, date, imgData) {
 
     return new Promise((resolve, reject) => {
-        db.run(`INSERT INTO paintings (title,date,imgSrc) VALUES (?,?,?)`, [prompt, date, imgData.fileSrc], (err) => {
+        db.run(`INSERT INTO paintings (title,date,imgSrc) VALUES (?,?,?)`, [prompt, date, imgData.fileSrc], function(err) {
             if (err) {
                 return reject(err)
             }
