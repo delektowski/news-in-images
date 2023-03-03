@@ -10,7 +10,13 @@ export async function handleSaveNewsImages() {
   for (const newsTitle of newsTitles) {
     const imgData = await handleCreatePainting(newsTitle.title);
     if (imgData) {
-      await saveImgDataToDb(newsTitle.title, todayDate, imgData);
+      await saveImgDataToDb(
+        newsTitle.title,
+        newsTitle.newsProvider,
+        newsTitle.country,
+        todayDate,
+        imgData
+      );
     }
   }
 }

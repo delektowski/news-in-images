@@ -1,6 +1,8 @@
 import playwright from "playwright";
 import {
-  dataDEUTSCHEWELLE,
+  dataARABNEWS,
+  dataCHINADAILY,
+  dataDEUTSCHEWELLE, dataHINDUSTANTIMES,
   dataLEMONDE,
   dataNYT,
   dataPAP,
@@ -10,12 +12,15 @@ import {
 
 export async function getNewsTitles() {
   const targetsData = [
+    dataCHINADAILY,
     dataPAP,
     dataNYT,
     dataTELEGRAPH,
     dataDEUTSCHEWELLE,
     dataLEMONDE,
     dataTASS,
+    dataHINDUSTANTIMES,
+    dataARABNEWS
   ];
   const newsTitles = [];
   const browser = await playwright.chromium.launch();

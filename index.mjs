@@ -1,7 +1,7 @@
 import express from "express";
 import router from "./routes/index.mjs";
-import { handleTableCreation } from "./db/handleTableCreation.mjs";
 import { handleSaveNewsImages } from "./db/handleSaveNewsImages.mjs";
+import { handleTableCreation } from "./db/database.mjs";
 
 const app = express();
 const PORT = 7070;
@@ -9,6 +9,7 @@ const PORT = 7070;
 handleTableCreation();
 handleSaveNewsImages();
 app.use(express.static("public"));
+app.use(express.static("node_modules/flag-icons"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 app.use(router);
