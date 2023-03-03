@@ -85,7 +85,13 @@
 }
 
 .image-container {
-    inline-size: 32rem;
+    inline-size: 25rem;
+}
+
+.image-painting {
+    width: 25rem;
+    height: 25rem;
+    object-fit: contain;
 }
 
 .img-title {

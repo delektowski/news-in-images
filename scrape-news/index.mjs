@@ -44,5 +44,5 @@ export async function getNewsTitles() {
     newsTitles.push(newsData);
   }
   await browser.close();
-  return newsTitles;
+  return newsTitles.flat();
 }

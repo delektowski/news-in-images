@@ -12,6 +12,7 @@ const configuration = new Configuration({
 const opeanai = new OpenAIApi(configuration);
 
 async function downloadImage(url, filepath) {
+
     const response = await axios({
         url,
         method: "GET",
@@ -29,6 +30,9 @@ async function downloadImage(url, filepath) {
 
 
 export async function handleCreatePainting(prompt) {
+    try {
+
+
     const response = await opeanai.createImage({
         prompt: `${prompt} by Zdzislaw Beksinski`,
         n: 1,
@@ -39,4 +43,9 @@ export async function handleCreatePainting(prompt) {
     await downloadImage(response.data.data[0].url, filepath);
 
     return {imgSrc: response.data.data[0].url, fileSrc};
+    } catch (e) {
+        console.log('ERROR:',e.message)
+
+    }
+
 }

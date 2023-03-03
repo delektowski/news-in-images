@@ -22,9 +22,5 @@ function createTable() {
 
 export function handleTableCreation(req, res, next) {
 
-  createTable().then(() => {
-    next();
-  }).catch(err => {
-      console.log("Error: ", err)
-  });
+  createTable()
 }
