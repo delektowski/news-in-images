@@ -9,14 +9,18 @@ header {
 }
 
 .main-title {
-    font-size: 2.2rem;
-    font-weight: 300;
+    font-size: 1.5rem;
+    font-weight: 400;
 }
 
 .main-subtitle {
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 300;
+}
+
+.subtitle-date {
+    font-weight: 400;
 }
 
 .main-container {
@@ -42,8 +46,8 @@ header {
 
 .img-title {
     color: grey;
-    font-style: oblique;
-    text-transform: capitalize;
+    text-align: center;
+    text-transform: uppercase;
     padding-inline: .5rem;
     margin-block-start: .5rem;
     margin-block-end: .5rem;
@@ -62,6 +66,10 @@ header {
 }
 
 @media screen and (max-width: 512px) {
+    .images-container {
+        justify-content: center;
+    }
+
     .image-painting {
         width: 96vw;
     }
