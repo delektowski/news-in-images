@@ -26,30 +26,6 @@ header {
     align-items: center;
 }
 
-.prompt-container {
-    margin-block-end: 2rem;
-}
-
-.title {
-    font-size: 1.5rem;
-    font-weight: 100;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-.form-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.prompt-input {
-    inline-size: 20rem;
-    block-size: 3rem;
-    resize: none;
-    padding-inline: .5rem;
-    padding-block: .5rem;
-}
 
 .images-container {
     inline-size: 90vw;
@@ -77,9 +53,6 @@ header {
     display: flex;
     justify-content: center;
     gap: 1rem;
-}
-
-.news-src {
     color: grey;
     font-style: oblique;
     text-transform: uppercase;

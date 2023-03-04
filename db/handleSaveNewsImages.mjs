@@ -1,11 +1,11 @@
 import { handleCreatePainting } from "../ai/handleCreatePainting.mjs";
 import { saveImgDataToDb } from "./database.mjs";
-import { todayDate } from "../lib/helpers.mjs";
+import { currentDate } from "../lib/helpers.mjs";
 import { getNewsTitles } from "../scrape-news/index.mjs";
+import dayjs from "dayjs";
 
-export async function handleSaveNewsImages() {
+async function saveNewsImages() {
   const newsTitles = await getNewsTitles();
-  console.log("newsTitles", newsTitles);
 
   for (const newsTitle of newsTitles) {
     const imgData = await handleCreatePainting(newsTitle.title);
@@ -14,9 +14,20 @@ export async function handleSaveNewsImages() {
         newsTitle.title,
         newsTitle.newsProvider,
         newsTitle.country,
-        todayDate,
+        currentDate,
         imgData
       );
     }
   }
+}
+
+export async function handleSaveNewsImages() {
+  const oneHour = 3600000;
+  await saveNewsImages();
+  setInterval(async () => {
+    const currentTime = dayjs().hour();
+    if (currentTime === 9) {
+      await saveNewsImages();
+    }
+  }, oneHour);
 }

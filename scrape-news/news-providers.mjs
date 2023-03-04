@@ -11,7 +11,7 @@ export const dataNYT = {
     mainSelector: "[data-hierarchy=feed]",
     subSelector: "h3",
     newsProvider: "New York Times",
-    country: "usa",
+    country: "us",
 };
 
 export const dataTELEGRAPH = {

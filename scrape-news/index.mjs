@@ -12,15 +12,15 @@ import {
 
 export async function getNewsTitles() {
   const targetsData = [
-    dataCHINADAILY,
-    dataPAP,
-    dataNYT,
-    dataTELEGRAPH,
-    dataDEUTSCHEWELLE,
-    dataLEMONDE,
-    dataTASS,
-    dataHINDUSTANTIMES,
-    dataARABNEWS
+    // dataCHINADAILY,
+    // dataPAP,
+    // dataNYT,
+    // dataTELEGRAPH,
+    // dataDEUTSCHEWELLE,
+    // dataLEMONDE,
+    // dataTASS,
+    // dataHINDUSTANTIMES,
+    // dataARABNEWS
   ];
   const newsTitles = [];
   const browser = await playwright.chromium.launch();
@@ -51,3 +51,5 @@ export async function getNewsTitles() {
   await browser.close();
   return newsTitles.flat();
 }
+
+

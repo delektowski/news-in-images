@@ -1,13 +1,16 @@
 import express from "express";
 import { selectImagesByDate } from "../db/database.mjs";
-import { todayDate } from "../lib/helpers.mjs";
+import { currentNewsDate, formatMonthToString } from "../lib/helpers.mjs";
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  selectImagesByDate(todayDate)
+  selectImagesByDate(currentNewsDate())
     .then((imgList) => {
-      res.render("pages/index", { imgList });
+      res.render("pages/index", {
+        imgList,
+        currentNewsDate: formatMonthToString(currentNewsDate()),
+      });
     })
     .catch((err) => {
       console.log("err", err);
