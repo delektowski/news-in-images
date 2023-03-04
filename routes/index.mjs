@@ -1,32 +1,21 @@
 import express from "express";
-import {saveImgDataToDb, selectImagesByDate} from "../db/database.mjs";
-import {handleCreatePainting} from "../ai/handleCreatePainting.mjs";
-import {todayDate} from "../lib/helpers.mjs";
+import { selectImagesByDate } from "../db/database.mjs";
+import { currentNewsDate, formatMonthToString } from "../lib/helpers.mjs";
 
 const router = express.Router();
 
-let prompt = '';
-
 router.get("/", (req, res) => {
-
-    selectImagesByDate(todayDate).then(imgList => {
-        res.render("pages/index", {imgSrc: null, prompt, imgList});
-
-    }).catch(err => {
-        console.log("err", err)
-        res.render("pages/index", {imgSrc: null, prompt});
+  selectImagesByDate(currentNewsDate())
+    .then((imgList) => {
+      res.render("pages/index", {
+        imgList,
+        currentNewsDate: formatMonthToString(currentNewsDate()),
+      });
     })
-
-});
-
-router.post("/", async (req, res) => {
-    prompt = req.body?.prompt;
-
-    if (prompt) {
-        const imgData = await handleCreatePainting(prompt);
-        const imgSrc = await saveImgDataToDb(prompt, todayDate, imgData);
-        res.render("pages/index", {imgSrc, prompt, imgList: null});
-    }
+    .catch((err) => {
+      console.log("err", err);
+      res.render("pages/index", { imgList: null });
+    });
 });
 
 export default router;
