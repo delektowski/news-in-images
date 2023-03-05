@@ -4,7 +4,7 @@ import { handleSaveNewsImages } from "./db/handleSaveNewsImages.mjs";
 import { handleTableCreation } from "./db/database.mjs";
 
 const app = express();
-const PORT = 7070;
+const PORT = 5555;
 
 handleTableCreation();
 handleSaveNewsImages();
