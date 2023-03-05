@@ -8,6 +8,7 @@ async function saveNewsImages() {
   const newsTitles = await getNewsTitles();
 
   for (const newsTitle of newsTitles) {
+    console.log("newsTitle", newsTitle);
     const imgData = await handleCreatePainting(newsTitle.title);
     if (imgData) {
       await saveImgDataToDb(
@@ -15,7 +16,8 @@ async function saveNewsImages() {
         newsTitle.newsProvider,
         newsTitle.country,
         currentDate(),
-        imgData
+        imgData,
+        newsTitle.link
       );
     }
   }

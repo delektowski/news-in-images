@@ -30,6 +30,11 @@ header {
     align-items: center;
 }
 
+a, .a:hover, .a:visited, .a:focus, .a:active {
+    text-decoration: none;
+    color: inherit;
+    outline: 0;
+}
 
 .images-container {
     inline-size: 90vw;
@@ -51,6 +56,11 @@ header {
     padding-inline: .5rem;
     margin-block-start: .5rem;
     margin-block-end: .5rem;
+}
+
+
+.image-container:hover .img-title {
+    color: inherit;
 }
 
 .news-src {
