@@ -14,7 +14,7 @@ async function saveNewsImages() {
         newsTitle.title,
         newsTitle.newsProvider,
         newsTitle.country,
-        currentDate,
+        currentDate(),
         imgData
       );
     }
@@ -25,8 +25,8 @@ export async function handleSaveNewsImages() {
   const oneHour = 3600000;
   await saveNewsImages();
   setInterval(async () => {
-    const currentTime = dayjs().hour();
-    if (currentTime === 9) {
+    const currentDayHour = dayjs().hour();
+    if (currentDayHour === 9) {
       await saveNewsImages();
     }
   }, oneHour);
