@@ -5,7 +5,6 @@ import { currentNewsDate, formatMonthToString } from "../lib/helpers.mjs";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    console.log("currentNewsDate()", currentNewsDate())
   selectImagesByDate(currentNewsDate())
     .then((imgList) => {
       res.render("pages/index", {
