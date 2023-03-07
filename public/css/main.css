@@ -58,7 +58,6 @@ a, .a:hover, .a:visited, .a:focus, .a:active {
     margin-block-end: .5rem;
 }
 
-
 .image-container:hover .img-title {
     color: inherit;
 }
@@ -76,6 +75,16 @@ a, .a:hover, .a:visited, .a:focus, .a:active {
 }
 
 @media screen and (max-width: 512px) {
+    .main-title {
+        font-size: 1.1rem;
+    }
+
+    .main-subtitle {
+        font-size: .9rem;
+    }
+    .image-container {
+        inline-size: 96vw;
+    }
     .images-container {
         justify-content: center;
     }
