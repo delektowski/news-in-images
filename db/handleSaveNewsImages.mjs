@@ -1,8 +1,7 @@
 import { handleCreatePainting } from "../ai/handleCreatePainting.mjs";
 import { saveImgDataToDb } from "./database.mjs";
-import { currentDate } from "../lib/helpers.mjs";
+import { currentDate, isBeforeHour } from "../lib/helpers.mjs";
 import { getNewsTitles } from "../scrape-news/index.mjs";
-import dayjs from "dayjs";
 
 async function saveNewsImages() {
   const newsTitles = await getNewsTitles();
@@ -25,8 +24,7 @@ export async function handleSaveNewsImages() {
   const oneHour = 3600000;
   await saveNewsImages();
   setInterval(async () => {
-    const currentDayHour = dayjs().hour();
-    if (currentDayHour === 9) {
+    if (isBeforeHour()) {
       await saveNewsImages();
     }
   }, oneHour);
