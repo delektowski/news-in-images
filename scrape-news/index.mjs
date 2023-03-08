@@ -12,13 +12,13 @@ import {
 
 export async function getNewsTitles() {
   const targetsData = [
-    dataCHINADAILY,
     dataPAP,
     dataNYT,
     dataTELEGRAPH,
     dataDEUTSCHEWELLE,
     dataLEMONDE,
     dataTASS,
+    dataCHINADAILY,
     dataHINDUSTANTIMES,
     dataARABNEWS
   ];
@@ -28,18 +28,20 @@ export async function getNewsTitles() {
   for (const item of targetsData) {
     const targetData = {
       subSelector: item.subSelector,
+      linkSelector: item.linkSelector,
       newsProvider: item.newsProvider,
       country: item.country,
     };
     await page.goto(item.url);
     const newsData = await page.$$eval(
       item.mainSelector,
-      async (element, { subSelector, newsProvider, country }) => {
+      async (element, { subSelector,linkSelector, newsProvider, country }) => {
         const data = [];
         await element.forEach((item, index) => {
           if (index === 0) {
             const title = item.querySelector(subSelector)?.innerText;
-            title && data.push({ title, newsProvider, country });
+            const link = item.querySelector(linkSelector)?.href;
+            title && data.push({ title, newsProvider, country,link });
           }
         });
         return data;

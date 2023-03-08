@@ -10,7 +10,7 @@ const db = new sqlite3.Database("./db/paintings.db", (err) => {
 export function handleTableCreation() {
   return new Promise((resolve, reject) => {
     db.run(
-      "CREATE TABLE IF NOT EXISTS paintings ( id INTEGER PRIMARY KEY, title TEXT, newsProvider TEXT, country TEXT, date varchar(40), imgSrc TEXT)",
+      "CREATE TABLE IF NOT EXISTS paintings ( id INTEGER PRIMARY KEY, title TEXT, newsProvider TEXT, country TEXT, date varchar(40), imgSrc TEXT, link TEXT)",
       function (err) {
         if (err) {
           return reject(err);
@@ -21,11 +21,11 @@ export function handleTableCreation() {
   });
 }
 
-export function saveImgDataToDb(title, newsProvider, country, date, imgData) {
+export function saveImgDataToDb(title, newsProvider, country, date, imgData, link) {
   return new Promise((resolve, reject) => {
     db.run(
-      `INSERT INTO paintings (title,newsProvider,country,date,imgSrc) VALUES (?,?,?,?,?)`,
-      [title, newsProvider, country, date, imgData.fileSrc],
+      `INSERT INTO paintings (title,newsProvider,country,date,imgSrc,link) VALUES (?,?,?,?,?,?)`,
+      [title, newsProvider, country, date, imgData.fileSrc, link],
       function (err) {
         if (err) {
           return reject(err);
