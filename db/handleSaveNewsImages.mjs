@@ -3,7 +3,7 @@ import { saveImgDataToDb } from "./database.mjs";
 import { currentDate } from "../lib/helpers.mjs";
 import { getNewsTitles } from "../scrape-news/index.mjs";
 import dayjs from "dayjs";
-import logger from "../logs/logger.mjs";
+import logger from "../logger/logger.mjs";
 
 async function saveNewsImages() {
   const newsTitles = await getNewsTitles();

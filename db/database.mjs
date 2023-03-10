@@ -1,5 +1,5 @@
 import sqlite3 from "sqlite3";
-import logger from "../logs/logger.mjs";
+import logger from "../logger/logger.mjs";
 
 const db = new sqlite3.Database("./db/paintings.db", (err) => {
   if (err) {
