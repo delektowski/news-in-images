@@ -5,7 +5,6 @@ import { handleTableCreation } from "./db/database.mjs";
 
 const app = express();
 const PORT = 5555;
-
 handleTableCreation();
 handleSaveNewsImages();
 app.use(express.static("public"));

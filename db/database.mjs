@@ -1,4 +1,5 @@
 import sqlite3 from "sqlite3";
+import logger from "../logs/logger.mjs";
 
 const db = new sqlite3.Database("./db/paintings.db", (err) => {
   if (err) {
@@ -21,7 +22,23 @@ export function handleTableCreation() {
   });
 }
 
-export function saveImgDataToDb(title, newsProvider, country, date, imgData, link) {
+export function saveImgDataToDb(
+  title,
+  newsProvider,
+  country,
+  date,
+  imgData,
+  link
+) {
+  logger.log(
+    "info",
+    `title: ${title}; newsProvider: ${newsProvider}; country: ${country}; date: ${date}; imgData: ${JSON.stringify(
+      imgData
+    )}; link: ${link}; `,
+    {
+      function: "saveImgDataToDb()",
+    }
+  );
   return new Promise((resolve, reject) => {
     db.run(
       `INSERT INTO paintings (title,newsProvider,country,date,imgSrc,link) VALUES (?,?,?,?,?,?)`,
@@ -38,6 +55,10 @@ export function saveImgDataToDb(title, newsProvider, country, date, imgData, lin
 }
 
 export function selectImagesByDate(date) {
+  console.log("selectImagesByDate date", date);
+  logger.log("info", `selectImagesByDate date: ${date}`, {
+    function: "selectImagesByDate()",
+  });
   return new Promise((resolve, reject) => {
     db.all("SELECT * FROM paintings WHERE date = ?", [date], (err, row) => {
       if (err) {

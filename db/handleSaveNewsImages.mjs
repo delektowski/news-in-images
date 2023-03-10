@@ -1,14 +1,17 @@
 import { handleCreatePainting } from "../ai/handleCreatePainting.mjs";
 import { saveImgDataToDb } from "./database.mjs";
-import { currentDate, isBeforeHour } from "../lib/helpers.mjs";
+import { currentDate } from "../lib/helpers.mjs";
 import { getNewsTitles } from "../scrape-news/index.mjs";
 import dayjs from "dayjs";
+import logger from "../logs/logger.mjs";
 
 async function saveNewsImages() {
   const newsTitles = await getNewsTitles();
 
+  logger.log("info", `News data: ${JSON.stringify(newsTitles)}`, {
+    function: "saveNewsImages()",
+  });
   for (const newsTitle of newsTitles) {
-    console.log("newsTitle", newsTitle);
     const imgData = await handleCreatePainting(newsTitle.title);
     if (imgData) {
       await saveImgDataToDb(
@@ -24,11 +27,26 @@ async function saveNewsImages() {
 }
 
 export async function handleSaveNewsImages() {
-  const oneHour = 3600000;
+  const moreThanHalfHour = 1800010;
   await saveNewsImages();
+
   setInterval(async () => {
-    if (dayjs().hour() === 6) {
+    logger.log("info", `Current hour: ${dayjs().hour()}`, {
+      function: "savePhotoData()",
+    });
+    logger.log("info", `Current time: ${dayjs()}`, {
+      function: "savePhotoData()",
+    });
+
+    if (dayjs().hour() === 7) {
+      logger.log(
+        "info",
+        `Condition dayjs().hour() === 7 is true: ${dayjs().hour()}`,
+        {
+          function: "savePhotoData()",
+        }
+      );
       await saveNewsImages();
     }
-  }, oneHour);
+  }, moreThanHalfHour);
 }
