@@ -7,11 +7,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
   const ipAddress = req.socket.remoteAddress;
-  const ipAddressesHeader = req.header("x-forwarded-for");
   loggerReq.log("info", `IP address: ${ipAddress}`, {
-    function: "route: '/'",
-  });
-  loggerReq.log("info", `IP address via header: ${ipAddressesHeader}`, {
     function: "route: '/'",
   });
   selectImagesByDate(currentNewsDate())
