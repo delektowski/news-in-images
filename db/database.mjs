@@ -32,9 +32,7 @@ export function saveImgDataToDb(
 ) {
   logger.log(
     "info",
-    `title: ${title}; newsProvider: ${newsProvider}; country: ${country}; date: ${date}; imgData: ${JSON.stringify(
-      imgData
-    )}; link: ${link}; `,
+    `title: ${title}; newsProvider: ${newsProvider}; country: ${country}; date: ${date}; link: ${link}; `,
     {
       function: "saveImgDataToDb()",
     }
@@ -55,7 +53,6 @@ export function saveImgDataToDb(
 }
 
 export function selectImagesByDate(date) {
-  console.log("selectImagesByDate date", date);
   logger.log("info", `selectImagesByDate date: ${date}`, {
     function: "selectImagesByDate()",
   });

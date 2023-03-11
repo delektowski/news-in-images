@@ -27,23 +27,23 @@ async function saveNewsImages() {
 }
 
 export async function handleSaveNewsImages() {
-  const moreThanHalfHour = 1800010;
+  const moreThanHalfHour = 3570000;
   await saveNewsImages();
 
   setInterval(async () => {
     logger.log("info", `Current hour: ${dayjs().hour()}`, {
-      function: "savePhotoData()",
+      function: "handleSaveNewsImages()",
     });
     logger.log("info", `Current time: ${dayjs()}`, {
-      function: "savePhotoData()",
+      function: "handleSaveNewsImages()",
     });
 
     if (dayjs().hour() === 7) {
       logger.log(
         "info",
-        `Condition dayjs().hour() === 7 is true: ${dayjs().hour()}`,
+        `Condition for saving is TRUE: ${dayjs().hour()}`,
         {
-          function: "savePhotoData()",
+          function: "handleSaveNewsImages()",
         }
       );
       await saveNewsImages();
