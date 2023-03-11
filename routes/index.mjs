@@ -1,10 +1,19 @@
 import express from "express";
 import { selectImagesByDate } from "../db/database.mjs";
 import { currentNewsDate, formatMonthToString } from "../lib/helpers.mjs";
+import loggerReq from "../logger/loggerReq.mjs";
 
 const router = express.Router();
 
 router.get("/", (req, res) => {
+  const ipAddress = req.socket.remoteAddress;
+  const ipAddressesHeader = req.header("x-forwarded-for");
+  loggerReq.log("info", `IP address: ${ipAddress}`, {
+    function: "route: '/'",
+  });
+  loggerReq.log("info", `IP address via header: ${ipAddressesHeader}`, {
+    function: "route: '/'",
+  });
   selectImagesByDate(currentNewsDate())
     .then((imgList) => {
       res.render("pages/index", {
