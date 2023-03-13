@@ -9,18 +9,20 @@ import {
   dataTASS,
   dataTELEGRAPH,
 } from "./news-providers.mjs";
+import logger from "../logger/logger.mjs";
+import dayjs from "dayjs";
 
 export async function getNewsTitles() {
   const targetsData = [
-    dataPAP,
-    dataNYT,
+    // dataPAP,
+    // dataNYT,
     dataTELEGRAPH,
-    dataDEUTSCHEWELLE,
+    // dataDEUTSCHEWELLE,
     dataLEMONDE,
-    dataTASS,
-    dataCHINADAILY,
-    dataHINDUSTANTIMES,
-    dataARABNEWS
+    // dataTASS,
+    // dataCHINADAILY,
+    // dataHINDUSTANTIMES,
+    // dataARABNEWS
   ];
   const newsTitles = [];
   const browser = await playwright.chromium.launch();
@@ -51,6 +53,9 @@ export async function getNewsTitles() {
     newsTitles.push(newsData);
   }
   await browser.close();
+  logger.log("info", `News titles: ${newsTitles.flat()}`, {
+    function: "getNewsTitles()",
+  });
   return newsTitles.flat();
 }
 
