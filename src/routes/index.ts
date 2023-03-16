@@ -1,11 +1,11 @@
-import express from "express";
-import { selectImagesByDate } from "../db/database.mjs";
-import { currentNewsDate, formatMonthToString } from "../lib/helpers.mjs";
-import loggerReq from "../logger/loggerReq.mjs";
+import { Request, Response, Router } from "express";
+import { selectImagesByDate } from "../db/database";
+import { currentNewsDate, formatMonthToString } from "../lib/helpers";
+import loggerReq from "../logger/loggerReq";
 
-const router = express.Router();
+const router = Router();
 
-router.get("/", (req, res) => {
+router.get("/", (req: Request, res: Response): void => {
   const ipAddress = req.socket.remoteAddress;
   loggerReq.log("info", `IP address: ${ipAddress}`, {
     function: "route: '/'",

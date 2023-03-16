@@ -1,9 +1,10 @@
-import express from "express";
-import router from "./routes/index.mjs";
-import { handleSaveNewsImages } from "./db/handleSaveNewsImages.mjs";
-import { handleTableCreation } from "./db/database.mjs";
+import * as express from "express";
+import { Express } from "express";
+import router from "./routes";
+import { handleSaveNewsImages } from "./db/handleSaveNewsImages";
+import { handleTableCreation } from "./db/database";
 
-const app = express();
+const app: Express = express();
 const PORT = 5555;
 handleTableCreation();
 handleSaveNewsImages();

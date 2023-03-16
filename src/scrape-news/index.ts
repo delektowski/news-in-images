@@ -8,9 +8,10 @@ import {
   dataPAP,
   dataTASS,
   dataTELEGRAPH,
-} from "./news-providers.mjs";
-import logger from "../logger/logger.mjs";
+} from "./news-providers";
+import logger from "../logger/logger";
 import dayjs from "dayjs";
+import {NewsTitlesModel} from "./models/news-titles.model";
 
 export async function getNewsTitles() {
   const targetsData = [
@@ -24,7 +25,7 @@ export async function getNewsTitles() {
     // dataHINDUSTANTIMES,
     // dataARABNEWS
   ];
-  const newsTitles = [];
+  const newsTitles:NewsTitlesModel[] = [];
   const browser = await playwright.chromium.launch();
   const page = await browser.newPage();
   for (const item of targetsData) {
@@ -38,11 +39,11 @@ export async function getNewsTitles() {
     const newsData = await page.$$eval(
       item.mainSelector,
       async (element, { subSelector,linkSelector, newsProvider, country }) => {
-        const data = [];
+        const data:NewsTitlesModel[] = [];
         await element.forEach((item, index) => {
           if (index === 0) {
-            const title = item.querySelector(subSelector)?.innerText;
-            const link = item.querySelector(linkSelector)?.href;
+            const title:string = (item.querySelector(subSelector) as HTMLElement)?.innerText;
+            const link = (item.querySelector(linkSelector) as HTMLAnchorElement)?.href;
             title && data.push({ title, newsProvider, country,link });
           }
         });
@@ -50,13 +51,13 @@ export async function getNewsTitles() {
       },
       targetData
     );
-    newsTitles.push(newsData);
+    newsTitles.push(...newsData);
   }
   await browser.close();
-  logger.log("info", `News titles: ${newsTitles.flat()}`, {
+  logger.log("info", `News titles: ${newsTitles}`, {
     function: "getNewsTitles()",
   });
-  return newsTitles.flat();
+  return newsTitles;
 }
 
 
