@@ -1,9 +1,10 @@
 import { Database } from 'sqlite3';
 import logger from "../logger/logger";
 
-const db = new Database("./db/paintings.db", (err) => {
+const db = new Database("./src/db/paintings.db", (err) => {
   if (err) {
     console.error(err.message);
+    return;
   }
   console.log("Connected to the paintings database.");
 });
