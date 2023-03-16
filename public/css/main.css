@@ -1,0 +1,104 @@
+body {
+    background-color: whitesmoke;
+}
+
+header {
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.main-title {
+    font-size: 1.5rem;
+    font-weight: 400;
+}
+
+.main-subtitle {
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+.subtitle-date {
+    font-weight: 400;
+}
+
+.main-container {
+    margin-block-start: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+a, .a:hover, .a:visited, .a:focus, .a:active {
+    text-decoration: none;
+    color: inherit;
+    outline: 0;
+}
+
+.images-container {
+    inline-size: 90vw;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.image-container {
+    inline-size: 32rem;
+}
+
+.img-title {
+    color: grey;
+    text-align: center;
+    text-transform: uppercase;
+    padding-inline: .5rem;
+    margin-block-start: .5rem;
+    margin-block-end: .5rem;
+}
+
+.image-container:hover .img-title {
+    color: inherit;
+}
+
+.news-src {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    color: grey;
+    font-style: oblique;
+    text-transform: uppercase;
+    text-align: center;
+    margin-block-start: .5rem;
+    font-size: .8rem;
+}
+
+@media screen and (max-width: 512px) {
+    .main-container {
+        margin-block-start: 0;
+    }
+
+    .main-title {
+        font-size: 1.1rem;
+    }
+
+    .main-subtitle {
+        font-size: .9rem;
+    }
+
+    .image-container {
+        inline-size: 96vw;
+    }
+
+    .images-container {
+        justify-content: center;
+        gap: .5rem;
+    }
+
+    .image-painting {
+        width: 96vw;
+    }
+}
+
+

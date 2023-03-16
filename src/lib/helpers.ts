@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import * as dayjs from 'dayjs';
 import logger from "../logger/logger";
 
 export function generateTitle(prompt: string): string {

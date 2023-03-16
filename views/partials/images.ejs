@@ -1,0 +1,16 @@
+<div class="images-container">
+    <% if(imgList){ %>
+        <% imgList.forEach(function(img){ %>
+            <a href="<%= img.link %>" target=”_blank”>
+                <div class="image-container">
+                    <img class="image-painting" src="<%= img.imgSrc %>" alt="ai generated image">
+                    <p class="img-title"><%= img.title %></p>
+                    <p class="news-src"><span class="fi fi-<%= img.country %>"></span><%= img.newsProvider %></p>
+                </div>
+            </a>
+        <% }); %>
+    <% } %>
+</div>
+
+
+
