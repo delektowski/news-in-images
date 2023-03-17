@@ -1,15 +1,15 @@
-import dayjs from "dayjs";
-import logger from "../logger/logger.mjs";
+import * as dayjs from 'dayjs';
+import logger from "../logger/logger";
 
-export function generateTitle(prompt) {
+export function generateTitle(prompt: string): string {
   return prompt.split(" ").splice(0, 5).join("-").toLowerCase();
 }
 
-export const currentDate = () => dayjs().format("YYYY-MM-DD");
+export const currentDate = (): string => dayjs().format("YYYY-MM-DD");
 
-export const isBeforeHour = () => dayjs().hour() < 7;
+export const isBeforeHour = (): boolean => dayjs().hour() < 8;
 
-export const currentNewsDate = () => {
+export const currentNewsDate = (): string => {
   logger.log("info", `Current hour: ${dayjs().hour()}`, {
     function: "currentNewsDate()",
   });
@@ -25,6 +25,6 @@ export const currentNewsDate = () => {
   return dayjs().format("YYYY-MM-DD");
 };
 
-export const formatMonthToString = (date) => {
-  return dayjs(date).format('D MMMM YYYY')
-}
+export const formatMonthToString = (date: string): string => {
+  return dayjs(date).format("D MMMM YYYY");
+};
