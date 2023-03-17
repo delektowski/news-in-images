@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "start": "nodemon index.mjs"
+    "start": "nodemon index.mjs",
+    "build": "rimraf ./dist && tsc"
   },
   "keywords": [],
   "author": "",
