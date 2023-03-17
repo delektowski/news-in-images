@@ -1,15 +1,16 @@
-import sqlite3 from "sqlite3";
-import logger from "../logger/logger.mjs";
+import { Database } from 'sqlite3';
+import logger from "../logger/logger";
 
-const db = new sqlite3.Database("./db/paintings.db", (err) => {
+const db = new Database("./src/db/paintings.db", (err) => {
   if (err) {
     console.error(err.message);
+    return;
   }
   console.log("Connected to the paintings database.");
 });
 
 export function handleTableCreation() {
-  return new Promise((resolve, reject) => {
+  return new Promise<void>((resolve, reject) => {
     db.run(
       "CREATE TABLE IF NOT EXISTS paintings ( id INTEGER PRIMARY KEY, title TEXT, newsProvider TEXT, country TEXT, date varchar(40), imgSrc TEXT, link TEXT)",
       function (err) {
@@ -23,12 +24,12 @@ export function handleTableCreation() {
 }
 
 export function saveImgDataToDb(
-  title,
-  newsProvider,
-  country,
-  date,
-  imgData,
-  link
+  title: string,
+  newsProvider: string,
+  country: string,
+  date: string,
+  imgData: { fileSrc: string },
+  link: string
 ) {
   logger.log(
     "info",
@@ -52,7 +53,7 @@ export function saveImgDataToDb(
   });
 }
 
-export function selectImagesByDate(date) {
+export function selectImagesByDate(date: string) {
   logger.log("info", `selectImagesByDate date: ${date}`, {
     function: "selectImagesByDate()",
   });
