@@ -7,6 +7,7 @@ const db = new Database(path.join(__dirname, "paintings.db"), (err) => {
     console.error(err.message);
     return;
   }
+  console.log("Connected to the paintings database.");
 });
 
 export function handleTableCreation() {
