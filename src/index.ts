@@ -5,11 +5,12 @@ import { handleSaveNewsImages } from "./db/handleSaveNewsImages";
 import { handleTableCreation } from "./db/database";
 import * as path from 'path';
 
+(global as any).__basedir = __dirname;
+
 const app: Express = express();
 const PORT = 5555;
 handleTableCreation();
 handleSaveNewsImages();
-
 app.use(express.static(path.join(__dirname, "./public")));
 app.use(express.static("node_modules/flag-icons"));
 app.set('views', path.join(__dirname, 'views'));
