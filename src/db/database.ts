@@ -12,9 +12,14 @@ const db = new Database(
   (err) => {
     if (err) {
       console.error(err.message);
+      logger.log("info", `Not connected. Error: ${err.message}`, {
+        function: "new Database()",
+      });
       return;
     }
-    console.log("Connected to the paintings database.");
+    logger.log("info", `Connected to the paintings database.`, {
+      function: "new Database()",
+    });
   }
 );
 
