@@ -1,14 +1,22 @@
-import { Database } from 'sqlite3';
+import { Database } from "sqlite3";
 import logger from "../logger/logger";
-import * as path from 'path';
+import * as path from "path";
 
-const db = new Database(path.join(process.cwd(), "./src/db/paintings.db"), (err) => {
-  if (err) {
-    console.error(err.message);
-    return;
+const devPath = "./src/db/paintings.db";
+const prodPath = "../src/db/paintings.db";
+const db = new Database(
+  path.join(
+    process.cwd(),
+    `${process.env.NODE_ENV==="production" ? prodPath : devPath}`
+  ),
+  (err) => {
+    if (err) {
+      console.error(err.message);
+      return;
+    }
+    console.log("Connected to the paintings database.");
   }
-  console.log("Connected to the paintings database.");
-});
+);
 
 export function handleTableCreation() {
   return new Promise<void>((resolve, reject) => {
