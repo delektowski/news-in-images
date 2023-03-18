@@ -2,7 +2,7 @@ import { Database } from 'sqlite3';
 import logger from "../logger/logger";
 import * as path from 'path';
 
-const db = new Database(path.join(__dirname, "paintings.db"), (err) => {
+const db = new Database(path.join(process.cwd(), "./src/db/paintings.db"), (err) => {
   if (err) {
     console.error(err.message);
     return;
