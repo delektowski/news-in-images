@@ -1,5 +1,5 @@
 import { createLogger, format, transports } from "winston";
-import path from "path";
+import * as path from "path";
 
 const { combine, timestamp, label, prettyPrint } = format;
 
