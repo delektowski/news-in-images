@@ -2,7 +2,7 @@ import { handleCreatePainting } from "../ai/handleCreatePainting";
 import { saveImgDataToDb } from "./database";
 import { currentDate } from "../lib/helpers";
 import { getNewsTitles } from "../scrape-news";
-import dayjs from "dayjs";
+import * as dayjs from 'dayjs';
 import logger from "../logger/logger";
 
 async function saveNewsImages() {

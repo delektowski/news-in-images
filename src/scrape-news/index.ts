@@ -16,7 +16,7 @@ import {NewsTitlesModel} from "./models/news-titles.model";
 export async function getNewsTitles() {
   const targetsData = [
     // dataPAP,
-    // dataNYT,
+    dataNYT,
     dataTELEGRAPH,
     // dataDEUTSCHEWELLE,
     dataLEMONDE,

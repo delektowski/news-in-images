@@ -1,8 +1,8 @@
 import * as dotenv from 'dotenv'
 import {Configuration, OpenAIApi} from "openai";
 import axios from "axios";
-import fs from "fs";
-import path from "path";
+import * as fs from 'fs';
+import * as path from "path";
 import {generateTitle} from "../lib/helpers";
 
 dotenv.config();
