@@ -2,7 +2,7 @@ import { Request, Response, Router } from "express";
 import { selectImagesByDate } from "../db/database";
 import { currentNewsDate, formatMonthToString } from "../lib/helpers";
 import loggerReq from "../logger/loggerReq";
-import dayjs from "dayjs";
+import * as dayjs from 'dayjs';
 
 const router = Router();
 

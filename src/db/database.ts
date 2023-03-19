@@ -1,7 +1,7 @@
 import { Database } from "sqlite3";
 import logger from "../logger/logger";
 import * as path from "path";
-import dayjs from "dayjs";
+import * as dayjs from 'dayjs';
 
 const devPath = "./src/db/paintings.db";
 const prodPath = "../src/db/paintings.db";
