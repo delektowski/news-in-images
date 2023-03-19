@@ -7,7 +7,7 @@ export function generateTitle(prompt: string): string {
 
 export const currentDate = (): string => dayjs().format("YYYY-MM-DD");
 
-export const isBeforeHour = (): boolean => dayjs().hour() < 8;
+export const isBeforeHour = (): boolean => dayjs().hour() < 9;
 
 export const currentNewsDate = (): string => {
   logger.log("info", `Current hour: ${dayjs().hour()}`, {
