@@ -28,7 +28,9 @@ async function saveNewsImages() {
 
 export async function handleSaveNewsImages() {
   const moreThanHalfHour = 3570000;
-
+  logger.log("info", `Start function: handleSaveNewsImages()`, {
+    function: "handleSaveNewsImages()",
+  });
   setInterval(async () => {
     logger.log("info", `Current hour: ${dayjs().hour()}`, {
       function: "handleSaveNewsImages()",
