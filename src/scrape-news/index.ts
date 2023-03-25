@@ -1,4 +1,4 @@
-import { chromium } from "playwright";
+import { chromium } from 'playwright';
 import { dataLEMONDE, dataNYT, dataTELEGRAPH } from "./news-providers";
 import logger from "../logger/logger";
 import { NewsTitlesModel } from "./models/news-titles.model";
@@ -18,6 +18,7 @@ export async function getNewsTitles() {
   const newsTitles: NewsTitlesModel[] = [];
   const browser = await chromium.launch();
   const page = await browser.newPage();
+
   for (const item of targetsData) {
     const targetData = {
       subSelector: item.subSelector,
@@ -52,3 +53,5 @@ export async function getNewsTitles() {
   });
   return newsTitles;
 }
+
+
