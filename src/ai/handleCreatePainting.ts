@@ -47,7 +47,7 @@ export async function handleCreatePainting(prompt: string) {
 
     return { imgSrc: response.data.data[0].url, fileSrc };
   } catch (e: unknown) {
-    logger.log("error", `Error: ${(e as {message: string}).message)}`, {
+    logger.log("error", `Error: ${(e as {message: string}).message}`, {
       function: "handleCreatePainting()",
     });
   }

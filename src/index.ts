@@ -9,6 +9,8 @@ const devPublicPath = "./src/public";
 const prodPublicPath = "../src/public";
 const devViewsPath = "./src/views";
 const prodViewsPath = "../src/views";
+const devIconsCssPath = "./node_modules/flag-icons";
+const prodIconsCssPath = "../node_modules/flag-icons";
 
 const app: Express = express();
 const PORT = 5555;
@@ -16,7 +18,8 @@ handleTableCreation();
 handleSaveNewsImages();
 app.use(express.static(path.join(process.cwd(),
     `${process.env.NODE_ENV==="production" ? prodPublicPath : devPublicPath}`)));
-app.use(express.static("node_modules/flag-icons"));
+app.use(express.static(path.join(process.cwd(),
+    `${process.env.NODE_ENV==="production" ? prodIconsCssPath  : devIconsCssPath}`)));
 app.set('views', path.join(process.cwd(),
     `${process.env.NODE_ENV==="production" ? prodViewsPath : devViewsPath}`));
 app.set("view engine", "ejs");
