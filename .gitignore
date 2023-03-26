@@ -135,5 +135,6 @@ dist
 .idea/
 paintings.db
 public/img
+src/public/img/
 logs.log
 
