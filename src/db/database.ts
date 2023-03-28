@@ -3,12 +3,12 @@ import logger from "../logger/logger";
 import * as path from "path";
 import * as dayjs from 'dayjs';
 
-const devPath = "./src/db/paintings.db";
-const prodPath = "../src/db/paintings.db";
+const dbPath = "./src/db/paintings.db";
+
 const db = new Database(
   path.join(
     process.cwd(),
-    `${process.env.NODE_ENV==="production" ? prodPath : devPath}`
+    `${dbPath}`
   ),
   (err) => {
     if (err) {

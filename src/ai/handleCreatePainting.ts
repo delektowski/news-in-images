@@ -12,8 +12,7 @@ const configuration = new Configuration({
 });
 const opeanai: OpenAIApi = new OpenAIApi(configuration);
 
-const devPath = "./src/public";
-const prodPath = "../src/public";
+const publicPath = "./src/public";
 
 async function downloadImage(url: string | undefined, filepath: string) {
   const response = await axios({
@@ -41,7 +40,7 @@ export async function handleCreatePainting(prompt: string) {
     });
     const filepath = path.join(
         process.cwd(),
-        `${process.env.NODE_ENV==="production" ? prodPath : devPath}`, "img", `${generateTitle(prompt)}.jpg`);
+        `${publicPath}`, "img", `${generateTitle(prompt)}.jpg`);
     const fileSrc = path.join("img", `${generateTitle(prompt)}.jpg`);
     await downloadImage(response?.data?.data[0]?.url, filepath);
 

@@ -4,7 +4,7 @@ import * as path from "path";
 const { combine, prettyPrint } = format;
 
 const devLoggerReqPath = "./src/logs/logs-req.log";
-const prodLoggerReqPath = "../src/logs/logs-req.log";
+const prodLoggerReqPath = "./src/logs/logs-req.log";
 
 const loggerReq = createLogger({
   level: "info",
