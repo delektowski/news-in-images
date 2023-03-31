@@ -11,6 +11,7 @@ router.get("/", (req: Request, res: Response): void => {
   loggerReq.log("info", `IP address: ${ipAddress} on: ${dayjs()}`, {
     function: "route: '/'",
   });
+
   selectImagesByDate(currentNewsDate())
     .then((imgList) => {
       res.render("pages/index", {
@@ -22,6 +23,20 @@ router.get("/", (req: Request, res: Response): void => {
       console.log("err", err);
       res.render("pages/index", { imgList: null });
     });
+});
+
+router.post("/test", (req: Request, res: Response): void => {
+
+  console.log("req23A", req.body)
+  selectImagesByDate(currentNewsDate())
+    .then((imgList) => {
+      res.json(imgList)
+    })
+    .catch((err) => {
+      console.log("err", err);
+
+    });
+
 });
 
 export default router;
