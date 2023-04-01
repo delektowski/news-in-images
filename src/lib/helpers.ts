@@ -1,4 +1,4 @@
-import * as dayjs from 'dayjs';
+import * as dayjs from "dayjs";
 import logger from "../logger/logger";
 
 export function generateTitle(prompt: string): string {
@@ -22,7 +22,15 @@ export const currentNewsDate = (): string => {
   logger.log("info", `isBeforeHour FALSE on: ${dayjs().hour()}`, {
     function: "currentNewsDate()",
   });
-  return dayjs().format("YYYY-MM-DD");
+  return dayjs().subtract(1, "day").format("YYYY-MM-DD");
+};
+
+export const daysBeforeDate = (daysBefore: number): string => {
+  logger.log("info", `Current hour: ${dayjs().hour()}`, {
+    function: "daysBeforeDate()",
+  });
+
+  return dayjs().subtract(daysBefore, "day").format("YYYY-MM-DD");
 };
 
 export const formatMonthToString = (date: string): string => {

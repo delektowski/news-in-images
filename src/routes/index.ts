@@ -1,8 +1,13 @@
 import { Request, Response, Router } from "express";
 import { selectImagesByDate } from "../db/database";
-import { currentNewsDate, formatMonthToString } from "../lib/helpers";
+import {
+  currentNewsDate,
+  daysBeforeDate,
+  formatMonthToString,
+} from "../lib/helpers";
 import loggerReq from "../logger/loggerReq";
-import * as dayjs from 'dayjs';
+import * as dayjs from "dayjs";
+import logger from "../logger/logger";
 
 const router = Router();
 
@@ -26,17 +31,17 @@ router.get("/", (req: Request, res: Response): void => {
 });
 
 router.post("/test", (req: Request, res: Response): void => {
-
-  console.log("req23A", req.body)
-  selectImagesByDate(currentNewsDate())
+  const { daysBefore } = req.body;
+  logger.log("info", `Days before: ${daysBefore}`, {
+    function: "daysBeforeAmount",
+  });
+  selectImagesByDate(daysBeforeDate(daysBefore))
     .then((imgList) => {
-      res.json(imgList)
+      res.json(imgList);
     })
     .catch((err) => {
       console.log("err", err);
-
     });
-
 });
 
 export default router;

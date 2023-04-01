@@ -1,4 +1,4 @@
-<button onclick="handleAddElement()">ADD</button>
+<button onclick="handleAddDailyNewsImages()">ADD</button>
 <div class="images-container">
     <% if(imgList){ %>
         <% imgList.forEach(function(img){ %>
@@ -12,36 +12,33 @@
             </a>
         <% }); %>
     <% } %>
-
 </div>
 
 <script>
-    function handleAddElement() {
-        const bodyReq = {koza: "jest"}
+    let daysBefore = 0;
+    function handleAddDailyNewsImages() {
+        daysBefore++
+        const body = {daysBefore}
         fetch("http://localhost:5555/test", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(bodyReq)
-        }).then(res => {
-
-            return res.json()
-        }).then(response => {
-            console.log("response1111", response)
-            addElement(response)
+            body: JSON.stringify(body)
+        }).then(res => res.json()).then(response => {
+            addDailyNewsImages(response)
         }).catch(err => {
-            console.log("ERRROEOREOROERER", err)
+            console.log("Error: ", err)
         })
-
     }
 
-    function addElement(data) {
+    function addDailyNewsImages(imagesData) {
         let fragment = new DocumentFragment();
         const mainContainer = document.querySelector('.main-container')
+        const imagesContainer = document.createElement('div')
+        imagesContainer.classList.add("images-container")
 
-        const createElements = () => {
-            const imagesContainer = document.createElement('div')
+        const setImage = (imageData) => {
             const anchorTag = document.createElement('a')
             const imageContainer = document.createElement('div')
             const image = document.createElement('img')
@@ -49,38 +46,32 @@
             const newsSrcContainer = document.createElement('div')
             const newsSrcText = document.createElement('p')
             const newsSrcFlag = document.createElement('span')
+            anchorTag.href = imageData.link
+            anchorTag.target = "_blank"
+            imageContainer.classList.add("image-container")
+            image.src = imageData.imgSrc
+            image.alt = "ai generated image"
+            image.classList.add("image-painting")
+            imageTitle.innerText = imageData.title
+            imageTitle.classList.add('img-title')
+            newsSrcContainer.classList.add('news-src')
+            newsSrcFlag.classList.add('fi', `fi-${imageData.country}`)
+            newsSrcText.innerText = imageData.newsProvider
+            newsSrcContainer.append(newsSrcFlag)
+            newsSrcContainer.append(newsSrcText)
+            imageContainer.append(image)
+            imageContainer.append(imageTitle)
+            imageContainer.append(newsSrcContainer)
+            anchorTag.append(imageContainer)
 
-            return () => {
-                imagesContainer.classList.add("images-container")
-                anchorTag.href = "https://www.telegraph.co.uk/world-news/2023/03/30/donald-trump-arrest-news-latest-indictment-stormy-daniels-cohen/"
-                anchorTag.target = "_blank"
-                imageContainer.classList.add("image-container")
-                image.src = "img/-live-.jpg"
-                image.alt = "ai generated image"
-                image.classList.add("image-painting")
-                imageTitle.innerText = "UN rapporteur on environmental defenders: 'The French state's response seemed largely disproportionate'"
-                imageTitle.classList.add('img-title')
-                newsSrcContainer.classList.add('news-src')
-                newsSrcFlag.classList.add('fi', 'fi-fr')
-                newsSrcText.innerText = "Le Monde"
-
-                return () => {
-                    newsSrcContainer.append(newsSrcFlag)
-                    newsSrcContainer.append(newsSrcText)
-                    imageContainer.append(image)
-                    imageContainer.append(imageTitle)
-                    imageContainer.append(newsSrcContainer)
-                    anchorTag.append(imageContainer)
-                    imagesContainer.append(anchorTag)
-
-                    fragment.append(imagesContainer)
-                    mainContainer.appendChild(fragment)
-                }
-            }
+            return anchorTag
         }
-
+        imagesData.forEach(imageData => {
+            imagesContainer.append(setImage(imageData))
+        })
+        fragment.append(imagesContainer)
+        mainContainer.appendChild(fragment)
     }
-
 </script>
 
 
