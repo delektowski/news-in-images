@@ -1,4 +1,3 @@
-<button onclick="handleAddDailyNewsImages()">ADD</button>
 <div class="images-container">
     <% if(imgList){ %>
         <% imgList.forEach(function(img){ %>
@@ -15,8 +14,23 @@
 </div>
 
 <script>
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 1.0
+    }
     let daysBefore = 0;
-    function handleAddDailyNewsImages() {
+    let observer = new IntersectionObserver(intersectionObserverCallback, options);
+
+    function intersectionObserverCallback(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                getDailyNewsImages()
+            }
+        })
+    }
+
+    function getDailyNewsImages() {
         daysBefore++
         const body = {daysBefore}
         fetch("http://localhost:5555/test", {
@@ -26,52 +40,66 @@
             },
             body: JSON.stringify(body)
         }).then(res => res.json()).then(response => {
-            addDailyNewsImages(response)
+            if (response.length > 0)
+                addDailyNewsImages(response)
         }).catch(err => {
             console.log("Error: ", err)
         })
     }
 
+    function setImage(imageData) {
+        const anchorTag = document.createElement('a');
+        const imageContainer = document.createElement('div');
+        const image = document.createElement('img');
+        const imageTitle = document.createElement('p');
+        const newsSrcContainer = document.createElement('div');
+        const newsSrcText = document.createElement('p');
+        const newsSrcFlag = document.createElement('span');
+        anchorTag.href = imageData.link;
+        anchorTag.target = "_blank"
+        imageContainer.classList.add("image-container")
+        image.src = imageData.imgSrc
+        image.alt = "ai generated image"
+        image.classList.add("image-painting")
+        imageTitle.innerText = imageData.title
+        imageTitle.classList.add('img-title')
+        newsSrcContainer.classList.add('news-src')
+        newsSrcFlag.classList.add('fi', `fi-${imageData.country}`)
+        newsSrcText.innerText = imageData.newsProvider
+        newsSrcContainer.append(newsSrcFlag)
+        newsSrcContainer.append(newsSrcText)
+        imageContainer.append(image)
+        imageContainer.append(imageTitle)
+        imageContainer.append(newsSrcContainer)
+        anchorTag.append(imageContainer)
+
+        return anchorTag
+    }
+
     function addDailyNewsImages(imagesData) {
         let fragment = new DocumentFragment();
-        const mainContainer = document.querySelector('.main-container')
-        const imagesContainer = document.createElement('div')
-        imagesContainer.classList.add("images-container")
+        const mainContainer = document.querySelector('.main-container');
+        const imagesContainer = document.createElement('div');
+        imagesContainer.classList.add("images-container");
 
-        const setImage = (imageData) => {
-            const anchorTag = document.createElement('a')
-            const imageContainer = document.createElement('div')
-            const image = document.createElement('img')
-            const imageTitle = document.createElement('p')
-            const newsSrcContainer = document.createElement('div')
-            const newsSrcText = document.createElement('p')
-            const newsSrcFlag = document.createElement('span')
-            anchorTag.href = imageData.link
-            anchorTag.target = "_blank"
-            imageContainer.classList.add("image-container")
-            image.src = imageData.imgSrc
-            image.alt = "ai generated image"
-            image.classList.add("image-painting")
-            imageTitle.innerText = imageData.title
-            imageTitle.classList.add('img-title')
-            newsSrcContainer.classList.add('news-src')
-            newsSrcFlag.classList.add('fi', `fi-${imageData.country}`)
-            newsSrcText.innerText = imageData.newsProvider
-            newsSrcContainer.append(newsSrcFlag)
-            newsSrcContainer.append(newsSrcText)
-            imageContainer.append(image)
-            imageContainer.append(imageTitle)
-            imageContainer.append(newsSrcContainer)
-            anchorTag.append(imageContainer)
-
-            return anchorTag
-        }
         imagesData.forEach(imageData => {
             imagesContainer.append(setImage(imageData))
         })
         fragment.append(imagesContainer)
         mainContainer.appendChild(fragment)
+
+        handleLazyLoadingImagesContainer();
     }
+
+    function handleLazyLoadingImagesContainer() {
+        const imagesContainers = document.querySelectorAll(".images-container")
+        let currentObserver = imagesContainers[imagesContainers.length - 1]
+        let previousObserver = imagesContainers[imagesContainers.length - 2]
+        observer.observe(currentObserver)
+        previousObserver && observer.unobserve(previousObserver)
+    }
+
+    handleLazyLoadingImagesContainer();
 </script>
 
 
