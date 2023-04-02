@@ -22,7 +22,7 @@ export const currentNewsDate = (): string => {
   logger.log("info", `isBeforeHour FALSE on: ${dayjs().hour()}`, {
     function: "currentNewsDate()",
   });
-  return dayjs().subtract(1, "day").format("YYYY-MM-DD");
+  return dayjs().subtract(0, "day").format("YYYY-MM-DD");
 };
 
 export const daysBeforeDate = (daysBefore: number): string => {

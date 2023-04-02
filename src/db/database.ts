@@ -2,6 +2,9 @@ import { Database } from "sqlite3";
 import logger from "../logger/logger";
 import * as path from "path";
 import * as dayjs from 'dayjs';
+import {ImgData} from "../models/ImageData.model";
+
+
 
 const dbPath = "./src/db/paintings.db";
 
@@ -68,7 +71,7 @@ export function saveImgDataToDb(
   });
 }
 
-export function selectImagesByDate(date: string) {
+export function selectImagesByDate(date: string): Promise<ImgData[]> {
   logger.log("info", `selectImagesByDate date: ${date}`, {
     function: "selectImagesByDate()",
   });
