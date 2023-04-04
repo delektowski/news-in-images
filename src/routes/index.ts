@@ -29,7 +29,7 @@ router.get("/", async (req: Request, res: Response): Promise<void> => {
   }
 });
 
-router.post("/test", async (req: Request, res: Response): Promise<void> => {
+router.post("/days-before", async (req: Request, res: Response): Promise<void> => {
   const { daysBefore } = req.body;
   logger.log("info", `Days before: ${daysBefore}`, {
     function: "daysBeforeAmount",
