@@ -9,7 +9,6 @@ let daysBefore = 0;
 let observer:IntersectionObserver = new IntersectionObserver(intersectionObserverCallback, options);
 function intersectionObserverCallback(entries: any[]): void {
   entries.forEach((entry) => {
-    console.log("entry", entry);
     if (entry.isIntersecting) {
       getDailyNewsImages();
     }
@@ -19,7 +18,7 @@ function intersectionObserverCallback(entries: any[]): void {
 function getDailyNewsImages(): void {
     daysBefore++
     const body = {daysBefore}
-    fetch("http://localhost:5555/test", {
+    fetch("http://localhost:5555/days-before", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.mjs",
   "scripts": {
-    "start": "nodemon -e ejs,ts,js src/index.ts",
+    "start": "nodemon -e ejs,ts src/index.ts",
     "build": "rimraf ./dist && tsc && cp .env ./dist"
   },
   "keywords": [],
