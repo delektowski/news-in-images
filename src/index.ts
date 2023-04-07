@@ -6,7 +6,6 @@ import { handleTableCreation } from "./db/database";
 import * as path from 'path';
 
 const publicPath = "./src/public";
-const publicDistPath = "./dist/public";
 const iconsCssPath = "./node_modules/flag-icons";
 const viewsPath = "./src/views";
 
@@ -16,8 +15,6 @@ handleTableCreation();
 handleSaveNewsImages();
 app.use(express.static(path.join(process.cwd(),
     `${publicPath}`)));
-app.use(express.static(path.join(process.cwd(),
-    `${publicDistPath}`)));
 app.use(express.static(path.join(process.cwd(),
     `${iconsCssPath}`)));
 app.set('views', path.join(process.cwd(),
