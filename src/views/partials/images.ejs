@@ -1,17 +1,4 @@
-<div class="images-container">
-    <% if(imgList){ %>
-        <% imgList.forEach(function(img){ %>
-            <a href="<%= img.link %>" target=”_blank”>
-                <div class="image-container">
-                    <img class="image-painting" src="<%= img.imgSrc %>" alt="ai generated image">
-                    <p class="img-title"><%= img.title %></p>
-                    <div class="news-src"><span class="fi fi-<%= img.country %>"></span>
-                        <p><%= img.newsProvider %></p></div>
-                </div>
-            </a>
-        <% }); %>
-    <% } %>
-</div>
+<div class="images-container"></div>
 
 <script>
 
@@ -22,7 +9,8 @@
     }
     let daysBefore = 0;
     let observer = new IntersectionObserver(intersectionObserverCallback, options);
-    function intersectionObserverCallback(entries){
+
+    function intersectionObserverCallback(entries) {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 getDailyNewsImages();
@@ -41,6 +29,7 @@
             },
             body: JSON.stringify(body)
         }).then(res => res.json()).then(response => {
+            console.log("response", response)
             if (daysBefore > 31) {
                 return;
             }
@@ -85,7 +74,7 @@
 
     function addDailyNewsImages(imagesData) {
         let fragment = new DocumentFragment();
-        const mainContainer= document.querySelector(".main-container");
+        const mainContainer = document.querySelector(".main-container");
         const imagesContainer = document.createElement("div");
         imagesContainer.classList.add("images-container");
 
