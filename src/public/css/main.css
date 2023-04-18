@@ -57,15 +57,18 @@ a, .a:hover, .a:visited, .a:focus, .a:active {
     display: flex;
     flex-direction: row;
 }
-.images-date:before, .images-date:after{
+
+.images-date:before, .images-date:after {
     content: "";
     flex: 1 1;
     border-bottom: 1px solid black;
     margin: auto;
 }
+
 .images-date:before {
     margin-right: .5rem;
 }
+
 .images-date:after {
     margin-left: .5rem;
 }
@@ -80,7 +83,7 @@ a, .a:hover, .a:visited, .a:focus, .a:active {
     text-transform: uppercase;
     padding-inline: .5rem;
     margin-block-start: .5rem;
-    margin-block-end: .5rem;
+    margin-block-end: -.3rem;
 }
 
 .image-container:hover .img-title {
@@ -129,6 +132,11 @@ a, .a:hover, .a:visited, .a:focus, .a:active {
     .image-painting {
         width: 96vw;
     }
+
+    .img-title {
+        margin-block-end: -0.8rem;
+    }
+
 }
 
 
