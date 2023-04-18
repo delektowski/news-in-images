@@ -76,15 +76,33 @@
         let fragment = new DocumentFragment();
         const mainContainer = document.querySelector(".main-container");
         const imagesContainer = document.createElement("div");
+        const imagesDate = imagesData[0].date
         imagesContainer.classList.add("images-container");
-
+        console.log('imagesData', imagesData)
+        addDailyNewsDate(fragment, imagesDate)
         imagesData.forEach((imageData) => {
+
             imagesContainer.append(setImage(imageData));
         });
         fragment.append(imagesContainer);
         mainContainer?.appendChild(fragment);
 
         handleLazyLoadingImagesContainer();
+    }
+
+    function addDailyNewsDate(fragment, date) {
+
+
+        const dailyNewsDate = document.createElement("h3")
+        dailyNewsDate.classList.add("images-date");
+        dailyNewsDate.innerText = formatDate(date);
+        fragment.append(dailyNewsDate);
+    }
+
+    function formatDate(date) {
+        const event = new Date(date);
+        const options = {year: 'numeric', month: 'long', day: 'numeric'};
+        return event.toLocaleDateString('en-En', options);
     }
 
     function handleLazyLoadingImagesContainer() {

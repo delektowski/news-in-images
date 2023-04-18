@@ -45,6 +45,31 @@ a, .a:hover, .a:visited, .a:focus, .a:active {
     flex-wrap: wrap;
 }
 
+.images-date {
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 200;
+    letter-spacing: 1px;
+    width: 16%;
+}
+
+.images-date {
+    display: flex;
+    flex-direction: row;
+}
+.images-date:before, .images-date:after{
+    content: "";
+    flex: 1 1;
+    border-bottom: 1px solid black;
+    margin: auto;
+}
+.images-date:before {
+    margin-right: .5rem;
+}
+.images-date:after {
+    margin-left: .5rem;
+}
+
 .image-container {
     inline-size: 32rem;
 }
@@ -80,11 +105,16 @@ a, .a:hover, .a:visited, .a:focus, .a:active {
     }
 
     .main-title {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     .main-subtitle {
+        font-size: .8rem;
+    }
+
+    .images-date {
         font-size: .9rem;
+        width: 70%;
     }
 
     .image-container {
