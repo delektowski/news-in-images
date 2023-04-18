@@ -4,7 +4,7 @@
 
     const options = {
         root: null,
-        rootMargin: '0px',
+        rootMargin: '100px',
         threshold: 1.0
     }
     let daysBefore = 0;
@@ -12,6 +12,7 @@
 
     function intersectionObserverCallback(entries) {
         entries.forEach((entry) => {
+            console.log("entry.isIntersecting", entry.isIntersecting)
             if (entry.isIntersecting) {
                 getDailyNewsImages();
             }
@@ -29,7 +30,6 @@
             },
             body: JSON.stringify(body)
         }).then(res => res.json()).then(response => {
-            console.log("response", response)
             if (daysBefore > 31) {
                 return;
             }
