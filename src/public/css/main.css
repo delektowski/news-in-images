@@ -46,22 +46,23 @@ a, .a:hover, .a:visited, .a:focus, .a:active {
 }
 
 .images-date {
-    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-    font-size: 1.2rem;
-    font-weight: 200;
-    letter-spacing: 1px;
     width: 20%;
-}
-
-.images-date {
     display: flex;
     flex-direction: row;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 200;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: gray;
 }
+
+
 
 .images-date:before, .images-date:after {
     content: "";
     flex: 1 1;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid gray;
     margin: auto;
 }
 
