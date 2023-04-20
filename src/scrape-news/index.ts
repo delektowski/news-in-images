@@ -1,5 +1,5 @@
 import { chromium } from 'playwright';
-import { dataLEMONDE, dataNYT, dataTELEGRAPH } from "./news-providers";
+import { dataTASS, dataNYT, dataDEUTSCHEWELLE } from "./news-providers";
 import logger from "../logger/logger";
 import { NewsTitlesModel } from "./models/news-titles.model";
 
@@ -7,10 +7,10 @@ export async function getNewsTitles() {
   const targetsData = [
     // dataPAP,
     dataNYT,
-    dataTELEGRAPH,
-    // dataDEUTSCHEWELLE,
-    dataLEMONDE,
-    // dataTASS,
+    // dataTELEGRAPH,
+    dataDEUTSCHEWELLE,
+    // dataLEMONDE,
+    dataTASS,
     // dataCHINADAILY,
     // dataHINDUSTANTIMES,
     // dataARABNEWS
