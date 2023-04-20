@@ -11,6 +11,5 @@ export const getLatestImgList = async (): Promise<ImgData[]> => {
     daysBefore++;
     await getLatestImgList();
   }
-
   return imgList;
 };

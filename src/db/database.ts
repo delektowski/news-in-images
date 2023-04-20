@@ -7,10 +7,6 @@ import {ImgData} from "../models/ImageData.model";
 
 
 const dbPath = "./src/db/paintings.db";
-console.log('koza',path.join(
-    process.cwd(),
-    `${dbPath}`
-))
 const db = new Database(
   path.join(
     process.cwd(),

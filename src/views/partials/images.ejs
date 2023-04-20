@@ -12,7 +12,6 @@
 
     function intersectionObserverCallback(entries) {
         entries.forEach((entry) => {
-            console.log("entry.isIntersecting", entry.isIntersecting)
             if (entry.isIntersecting) {
                 getDailyNewsImages();
             }
@@ -21,7 +20,6 @@
 
     function getDailyNewsImages() {
         const currentLocation = window.location.href
-        daysBefore++
         const body = {daysBefore}
         fetch(`${currentLocation}days-before`, {
             method: "POST",
@@ -30,6 +28,7 @@
             },
             body: JSON.stringify(body)
         }).then(res => res.json()).then(response => {
+            daysBefore++
             if (daysBefore > 31) {
                 return;
             }
@@ -78,7 +77,6 @@
         const imagesContainer = document.createElement("div");
         const imagesDate = imagesData[0].date
         imagesContainer.classList.add("images-container");
-        console.log('imagesData', imagesData)
         addDailyNewsDate(fragment, imagesDate)
         imagesData.forEach((imageData) => {
 
@@ -91,8 +89,6 @@
     }
 
     function addDailyNewsDate(fragment, date) {
-
-
         const dailyNewsDate = document.createElement("h3")
         dailyNewsDate.classList.add("images-date");
         dailyNewsDate.innerText = formatDate(date);
