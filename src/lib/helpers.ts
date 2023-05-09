@@ -1,5 +1,6 @@
 import * as dayjs from "dayjs";
 import logger from "../logger/logger";
+import {NewsSelectorDataModel} from "../models/newsSelectorData.model";
 
 export function generateTitle(prompt: string): string {
   return prompt.split(" ").splice(0, 5).join("-").toLowerCase();
@@ -36,3 +37,12 @@ export const daysBeforeDate = (daysBefore: number): string => {
 export const formatMonthToString = (date: string): string => {
   return dayjs(date).format("D MMMM YYYY");
 };
+
+export const shuffleArrayOrder = (arr: NewsSelectorDataModel[]): NewsSelectorDataModel[] => {
+  return arr
+    .map((value: NewsSelectorDataModel) => ({ value, sort: Math.random() }))
+    .sort((a: { sort: number }, b: { sort: number }) => a.sort - b.sort)
+    .map(({ value }) => value);
+}
+
+

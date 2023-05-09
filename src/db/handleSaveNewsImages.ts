@@ -8,9 +8,15 @@ import logger from "../logger/logger";
 async function saveNewsImages() {
   const newsTitles = await getNewsTitles();
 
-  logger.log("info", `News data: ${JSON.stringify(newsTitles)}`, {
+  logger.log("info", `News length: ${newsTitles.length}`, {
     function: "saveNewsImages()",
   });
+
+  for (let item of newsTitles) {
+    logger.log("info", `Country: ${item.country}`, {
+      function: "COUNTRY",
+    });
+  }
   for (const newsTitle of newsTitles) {
     const imgData = await handleCreatePainting(newsTitle.title);
     if (imgData) {
@@ -28,16 +34,9 @@ async function saveNewsImages() {
 
 export async function handleSaveNewsImages() {
   const moreThanHalfHour = 3570000;
-  logger.log("info", `Start function: handleSaveNewsImages()`, {
-    function: "handleSaveNewsImages()",
-  });
+
   setInterval(async () => {
-    logger.log("info", `Current hour: ${dayjs().hour()}`, {
-      function: "handleSaveNewsImages()",
-    });
-    logger.log("info", `Current time: ${dayjs()}`, {
-      function: "handleSaveNewsImages()",
-    });
+
 
     if (dayjs().hour() === 7) {
       logger.log(
