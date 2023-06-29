@@ -13,6 +13,7 @@ const app: Express = express();
 const PORT = 5555;
 handleTableCreation();
 handleSaveNewsImages();
+
 app.use(express.static(path.join(process.cwd(),
     `${publicPath}`)));
 app.use(express.static(path.join(process.cwd(),

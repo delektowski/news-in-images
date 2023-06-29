@@ -12,6 +12,9 @@ import logger from "../logger/logger";
 import { NewsTitlesModel } from "./models/news-titles.model";
 import { NewsSelectorDataModel } from "../models/newsSelectorData.model";
 import { shuffleArrayOrder } from "../lib/helpers";
+
+export let targetsData: NewsSelectorDataModel[] = []
+
 async function addNewsData(
   item: NewsSelectorDataModel,
   page: any,
@@ -23,6 +26,7 @@ async function addNewsData(
     newsProvider: item.newsProvider,
     country: item.country,
   };
+
   await page.goto(item.url);
   const newsData = await page.$$eval(
     item.mainSelector,
@@ -49,23 +53,14 @@ async function addNewsData(
     },
     targetData
   );
+  console.log('newsData23',await newsData[0].title)
   newsTitles.push(...newsData);
 }
 
 export async function getNewsTitles(newsDataNumber = 3): Promise<NewsTitlesModel[]> {
 
   const newsTitles: NewsTitlesModel[] = [];
-  const targetsData: NewsSelectorDataModel[] = shuffleArrayOrder([
-    dataPAP,
-    dataNYT,
-    dataTELEGRAPH,
-    dataDEUTSCHEWELLE,
-    dataLEMONDE,
-    dataTASS,
-    dataCHINADAILY,
-    dataHINDUSTANTIMES,
-    dataARABNEWS
-  ]);
+
 
   const browser = await chromium.launch();
   const page = await browser.newPage();
@@ -76,11 +71,18 @@ export async function getNewsTitles(newsDataNumber = 3): Promise<NewsTitlesModel
     currentNewNumber++
   ) {
     if (targetsData.length > 0) {
+      try {
+
       await addNewsData(
         targetsData.pop() as unknown as NewsSelectorDataModel,
         page,
         newsTitles
       );
+      } catch (e) {
+        console.log("error addNewsData: ", e)
+        currentNewNumber--
+        
+      }
     }
   }
   await browser.close();

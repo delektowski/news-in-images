@@ -34,7 +34,7 @@ async function downloadImage(url: string | undefined, filepath: string) {
 export async function handleCreatePainting(prompt: string) {
   try {
     const response = await opeanai.createImage({
-      prompt: `${prompt} in the hyperrealistic style of Zdzislaw Beksinski`,
+      prompt: `${prompt} in style of Zdzislaw Beksinski`,
       n: 1,
       size: "512x512",
     });
