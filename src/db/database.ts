@@ -15,7 +15,7 @@ const db = new Database(
   (err) => {
     if (err) {
       console.error(err.message);
-      logger.log("info", `Not connected. Error: ${err.message}`, {
+      logger.log("error", `Not connected. Error: ${err.message}`, {
         function: "new Database()",
       });
       return;
@@ -71,9 +71,7 @@ export function saveImgDataToDb(
 }
 
 export function selectImagesByDate(date: string): Promise<ImgData[]> {
-  logger.log("info", `selectImagesByDate date: ${date}`, {
-    function: "selectImagesByDate()",
-  });
+
   return new Promise((resolve, reject) => {
     db.all("SELECT * FROM paintings WHERE date = ?", [date], (err, row) => {
       if (err) {

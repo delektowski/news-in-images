@@ -14,6 +14,27 @@ const opeanai: OpenAIApi = new OpenAIApi(configuration);
 
 const publicPath = "./src/public";
 
+export async function handleCreatePainting(prompt: string) {
+  try {
+    const response = await opeanai.createImage({
+      prompt: `${prompt} in realistic style and climate of Zdzislaw Beksinski paintings`,
+      n: 1,
+      size: "512x512",
+    });
+    const filepath = path.join(
+        process.cwd(),
+        `${publicPath}`, "img", `${generateTitle(prompt)}.jpg`);
+    const fileSrc = path.join("img", `${generateTitle(prompt)}.jpg`);
+    await downloadImage(response?.data?.data[0]?.url, filepath);
+
+    return { imgSrc: response.data.data[0].url, fileSrc };
+  } catch (e: unknown) {
+    logger.log("error", `Error: ${(e as {message: string}).message}`, {
+      function: "handleCreatePainting()",
+    });
+  }
+}
+
 async function downloadImage(url: string | undefined, filepath: string) {
   const response = await axios({
     url,
@@ -31,23 +52,4 @@ async function downloadImage(url: string | undefined, filepath: string) {
 }
 
 
-export async function handleCreatePainting(prompt: string) {
-  try {
-    const response = await opeanai.createImage({
-      prompt: `${prompt} in style of Zdzislaw Beksinski`,
-      n: 1,
-      size: "512x512",
-    });
-    const filepath = path.join(
-        process.cwd(),
-        `${publicPath}`, "img", `${generateTitle(prompt)}.jpg`);
-    const fileSrc = path.join("img", `${generateTitle(prompt)}.jpg`);
-    await downloadImage(response?.data?.data[0]?.url, filepath);
 
-    return { imgSrc: response.data.data[0].url, fileSrc };
-  } catch (e: unknown) {
-    logger.log("error", `Error: ${(e as {message: string}).message}`, {
-      function: "handleCreatePainting()",
-    });
-  }
-}

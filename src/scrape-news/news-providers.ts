@@ -1,3 +1,7 @@
+import {NewsSelectorDataModel} from "../models/newsSelectorData.model";
+
+export let newsProvidersData: NewsSelectorDataModel[] = [];
+
 export const dataPAP = {
     url: "https://www.pap.pl/en",
     mainSelector: "h1",

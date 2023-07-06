@@ -1,19 +1,42 @@
 import { chromium } from "playwright";
-import {
-  dataTASS,
-  dataNYT,
-  dataDEUTSCHEWELLE,
-  dataPAP,
-  dataTELEGRAPH,
-  dataLEMONDE,
-  dataCHINADAILY, dataHINDUSTANTIMES, dataARABNEWS
-} from "./news-providers";
 import logger from "../logger/logger";
 import { NewsTitlesModel } from "./models/news-titles.model";
 import { NewsSelectorDataModel } from "../models/newsSelectorData.model";
-import { shuffleArrayOrder } from "../lib/helpers";
+import { newsProvidersData } from "./news-providers";
 
-export let targetsData: NewsSelectorDataModel[] = []
+export async function getNewsTitles(
+  newsDataNumber: number
+): Promise<NewsTitlesModel[]> {
+  const newsTitles: NewsTitlesModel[] = [];
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+
+  for (
+    let currentNewsNumber = 1;
+    currentNewsNumber <= newsDataNumber;
+    currentNewsNumber++
+  ) {
+    if (newsProvidersData.length > 0) {
+      try {
+        await addNewsData(
+          newsProvidersData.pop() as unknown as NewsSelectorDataModel,
+          page,
+          newsTitles
+        );
+      } catch (e) {
+        logger.log("error", `Error on adding news data: ${(e as {message: string}).message}`, {
+          function: "getNewsTitles()",
+        });
+        currentNewsNumber--;
+      }
+    }
+  }
+  await browser.close();
+  logger.log("info", `News titles number: ${newsTitles.length}`, {
+    function: "getNewsTitles()",
+  });
+  return newsTitles;
+}
 
 async function addNewsData(
   item: NewsSelectorDataModel,
@@ -53,42 +76,8 @@ async function addNewsData(
     },
     targetData
   );
-  console.log('newsData23',await newsData[0].title)
-  newsTitles.push(...newsData);
-}
-
-export async function getNewsTitles(newsDataNumber = 3): Promise<NewsTitlesModel[]> {
-
-  const newsTitles: NewsTitlesModel[] = [];
-
-
-  const browser = await chromium.launch();
-  const page = await browser.newPage();
-
-  for (
-    let currentNewNumber = 0;
-    currentNewNumber < newsDataNumber;
-    currentNewNumber++
-  ) {
-    if (targetsData.length > 0) {
-      try {
-
-      await addNewsData(
-        targetsData.pop() as unknown as NewsSelectorDataModel,
-        page,
-        newsTitles
-      );
-      } catch (e) {
-        console.log("error addNewsData: ", e)
-        currentNewNumber--
-        
-      }
-    }
+  if (newsData.length === 0) {
+    throw new Error("No news data");
   }
-  await browser.close();
-  logger.log("info", `News titles number: ${newsTitles.length}`, {
-    function: "getNewsTitles()",
-  });
-
-  return newsTitles;
+  newsTitles.push(...newsData);
 }

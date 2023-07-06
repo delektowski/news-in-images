@@ -31,9 +31,6 @@ router.get("/", async (req: Request, res: Response): Promise<void> => {
 
 router.post("/days-before", async (req: Request, res: Response): Promise<void> => {
   const { daysBefore } = req.body;
-  logger.log("info", `Days before: ${daysBefore}`, {
-    function: "daysBeforeAmount",
-  })
   try {
     const imgList = await selectImagesByDate(daysBeforeDate(daysBefore));
     res.json(imgList);
