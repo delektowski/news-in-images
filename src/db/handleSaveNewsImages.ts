@@ -9,7 +9,6 @@ import { refreshNewsProvidersData } from "../scrape-news/refresh-news-providers-
 export async function handleSaveNewsImages() {
   const moreThanHalfHour = 3570000;
 
-
   setInterval(async () => {
     if (dayjs().hour() === 7) {
       refreshNewsProvidersData();

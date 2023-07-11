@@ -22,7 +22,7 @@ export const dataNYT = {
 
 export const dataTELEGRAPH = {
     url: "https://www.telegraph.co.uk/",
-    mainSelector: "[data-track-wrapper=major-news]",
+    mainSelector: "[data-test=package--medium]",
     subSelector: "[data-test=list-headline-link] [data-test=headline] span",
     linkSelector: "[data-test=list-headline-link]",
     newsProvider: "The Telegraph",
@@ -58,15 +58,15 @@ export const dataTASS = {
 
 export const dataCHINADAILY = {
     url: "https://www.chinadaily.com.cn/",
-    mainSelector: ".banner_top .MainBlock_Right",
-    subSelector: "h4 > a",
-    linkSelector: "h4 > a",
+    mainSelector: ".tMain .tmR",
+    subSelector: "h2 > a",
+    linkSelector: "h2 > a",
     newsProvider: "China Daily",
     country: "cn",
 };
 
 export const dataHINDUSTANTIMES = {
-    url: "https://www.hindustantimes.com//",
+    url: "https://www.hindustantimes.com/",
     mainSelector: "[data-vars-cardtype=top-news]",
     subSelector: "h3 > a",
     linkSelector: "h3 > a",
@@ -81,4 +81,20 @@ export const dataARABNEWS = {
     linkSelector: "h1 > a",
     newsProvider: "Arab News",
     country: "sa",
+};
+export const dataBATIMES = {
+    url: "https://www.batimes.com.ar/",
+    mainSelector: "article",
+    subSelector: "h1",
+    linkSelector: "article > a",
+    newsProvider: "Buenos Aires Times",
+    country: "ar",
+};
+export const dataTHEAUSTRALIAN = {
+    url: "https://www.theaustralian.com.au/",
+    mainSelector: ".main__content .story-block",
+    subSelector: "h3 > a",
+    linkSelector: "h3 > a",
+    newsProvider: "news.com.au",
+    country: "au",
 };

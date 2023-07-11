@@ -12,6 +12,7 @@ import {
   dataPAP,
   dataTASS,
   dataTELEGRAPH,
+  dataBATIMES,
 } from "./news-providers";
 
 export function refreshNewsProvidersData() {
@@ -27,15 +28,16 @@ export function refreshNewsProvidersData() {
   newsProvidersData.splice(0, newsProvidersData.length);
   newsProvidersData.push(
     ...shuffleArrayOrder([
-      dataPAP,
-      dataNYT,
-      dataTELEGRAPH,
-      dataDEUTSCHEWELLE,
-      dataLEMONDE,
-      dataTASS,
-      dataCHINADAILY,
-      dataHINDUSTANTIMES,
       dataARABNEWS,
+      dataCHINADAILY,
+      dataDEUTSCHEWELLE,
+      dataHINDUSTANTIMES,
+      dataLEMONDE,
+      dataNYT,
+      dataPAP,
+      dataTASS,
+      dataTELEGRAPH,
+      dataBATIMES,
     ])
   );
 }
