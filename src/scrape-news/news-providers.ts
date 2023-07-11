@@ -90,11 +90,11 @@ export const dataBATIMES = {
     newsProvider: "Buenos Aires Times",
     country: "ar",
 };
-export const dataTHEAUSTRALIAN = {
-    url: "https://www.theaustralian.com.au/",
-    mainSelector: ".main__content .story-block",
-    subSelector: "h3 > a",
-    linkSelector: "h3 > a",
-    newsProvider: "news.com.au",
+export const dataTHESYDNEYMORNINGHERALD = {
+    url: "https://www.smh.com.au/",
+    mainSelector: "[data-an-cu-group=news-well]",
+    subSelector: "[data-pb-type=hl] [data-testid=article-link]",
+    linkSelector: "[data-pb-type=hl] [data-testid=article-link]",
+    newsProvider: "The Sydney Morning Herald",
     country: "au",
 };

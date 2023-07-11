@@ -2,8 +2,8 @@ import logger from "../logger/logger";
 import * as dayjs from "dayjs";
 import { shuffleArrayOrder } from "../lib/helpers";
 import {
-  newsProvidersData,
   dataARABNEWS,
+  dataBATIMES,
   dataCHINADAILY,
   dataDEUTSCHEWELLE,
   dataHINDUSTANTIMES,
@@ -12,7 +12,8 @@ import {
   dataPAP,
   dataTASS,
   dataTELEGRAPH,
-  dataBATIMES,
+  dataTHESYDNEYMORNINGHERALD,
+  newsProvidersData,
 } from "./news-providers";
 
 export function refreshNewsProvidersData() {
@@ -38,6 +39,7 @@ export function refreshNewsProvidersData() {
       dataTASS,
       dataTELEGRAPH,
       dataBATIMES,
+      dataTHESYDNEYMORNINGHERALD,
     ])
   );
 }
