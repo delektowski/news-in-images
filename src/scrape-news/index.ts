@@ -3,6 +3,7 @@ import logger from "../logger/logger";
 import { NewsTitlesModel } from "./models/news-titles.model";
 import { NewsSelectorDataModel } from "../models/newsSelectorData.model";
 import { newsProvidersData } from "./news-providers";
+import {refreshNewsProvidersData} from "./refresh-news-providers-data";
 
 export async function getNewsTitles(
   newsDataNumber: number
@@ -16,7 +17,11 @@ export async function getNewsTitles(
     currentNewsNumber <= newsDataNumber;
     currentNewsNumber++
   ) {
-    if (newsProvidersData.length > 0) {
+    if(newsProvidersData.length <= 3) {
+      refreshNewsProvidersData();
+    }
+
+    if (newsProvidersData.length > 3) {
       try {
         await addNewsData(
           newsProvidersData.pop() as unknown as NewsSelectorDataModel,
@@ -81,3 +86,5 @@ async function addNewsData(
   }
   newsTitles.push(...newsData);
 }
+
+

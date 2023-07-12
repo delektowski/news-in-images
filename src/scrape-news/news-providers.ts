@@ -98,3 +98,59 @@ export const dataTHESYDNEYMORNINGHERALD = {
     newsProvider: "The Sydney Morning Herald",
     country: "au",
 };
+export const dataFOLHADESPAULO = {
+    url: "https://www1.folha.uol.com.br/internacional/en/",
+    mainSelector: ".c-main-headline__wrapper",
+    subSelector: "a h2",
+    linkSelector: "a.c-main-headline__url",
+    newsProvider: "Folha De S.Paulo",
+    country: "br",
+};
+export const dataCTVNEWS = {
+    url: "https://www.ctvnews.ca/",
+    mainSelector: "article",
+    subSelector: "h3",
+    linkSelector: "a",
+    newsProvider: "CTV News",
+    country: "ca",
+};
+export const dataEUOBSERVER = {
+    url: "https://euobserver.com/",
+    mainSelector: "main",
+    subSelector: "h1 > a",
+    linkSelector: "h1 > a",
+    newsProvider: "EU Observer",
+    country: "eu",
+};
+export const dataANTARANEWS = {
+    url: "https://en.antaranews.com/",
+    mainSelector: "[data-stickyparent]",
+    subSelector: "article:first-child h3 a",
+    linkSelector: "article:first-child h3 a",
+    newsProvider: "Antara News",
+    country: "id",
+};
+export const dataANSA = {
+    url: "https://www.ansa.it/english/",
+    mainSelector: "article.big",
+    subSelector: "h3 a",
+    linkSelector: "h3 a",
+    newsProvider: "Ansa",
+    country: "it",
+};
+export const dataTHEJAPANTIMES = {
+    url: "https://www.japantimes.co.jp/",
+    mainSelector: ".lead_stories",
+    subSelector: "a hgroup p",
+    linkSelector: "a",
+    newsProvider: "The Japan Times",
+    country: "jp",
+};
+export const dataMEXICONEWSDAILY = {
+    url: "https://mexiconewsdaily.com/",
+    mainSelector: ".wpb_wrapper",
+    subSelector: "h3 a",
+    linkSelector: "h3 a",
+    newsProvider: "Mexico News Daily",
+    country: "mx",
+};
