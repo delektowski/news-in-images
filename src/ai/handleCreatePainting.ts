@@ -17,7 +17,7 @@ const publicPath = "./src/public";
 export async function handleCreatePainting(prompt: string) {
   try {
     const response = await opeanai.createImage({
-      prompt: `${prompt} in realistic style and climate of Zdzislaw Beksinski paintings`,
+      prompt: `${prompt} hyperrealistic art of Zdzislaw Beksinski`,
       n: 1,
       size: "512x512",
     });
