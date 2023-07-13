@@ -1,5 +1,3 @@
-import logger from "../logger/logger";
-import * as dayjs from "dayjs";
 import { shuffleArrayOrder } from "../lib/helpers";
 import {
   dataANSA,
@@ -8,6 +6,7 @@ import {
   dataBATIMES,
   dataCHINADAILY,
   dataCTVNEWS,
+  dataDAILYSABAH,
   dataDEUTSCHEWELLE,
   dataEUOBSERVER,
   dataFOLHADESPAULO,
@@ -15,24 +14,16 @@ import {
   dataLEMONDE,
   dataMEXICONEWSDAILY,
   dataNYT,
-  dataPAP,
+  dataSANEWS,
   dataTASS,
   dataTELEGRAPH,
   dataTHEJAPANTIMES,
   dataTHESYDNEYMORNINGHERALD,
+  dataYONHAPNEWSAGENCY,
   newsProvidersData,
 } from "./news-providers";
 
 export function refreshNewsProvidersData() {
-  logger.log(
-    "info",
-    `Content of newsProvidersData on ${dayjs().hour()}: ${JSON.stringify(
-      newsProvidersData
-    )}`,
-    {
-      function: "handleSaveNewsImages()",
-    }
-  );
   newsProvidersData.splice(0, newsProvidersData.length);
   newsProvidersData.push(
     ...shuffleArrayOrder([
@@ -42,6 +33,7 @@ export function refreshNewsProvidersData() {
       dataBATIMES,
       dataCHINADAILY,
       dataCTVNEWS,
+      dataDAILYSABAH,
       dataDEUTSCHEWELLE,
       dataEUOBSERVER,
       dataFOLHADESPAULO,
@@ -49,11 +41,12 @@ export function refreshNewsProvidersData() {
       dataLEMONDE,
       dataMEXICONEWSDAILY,
       dataNYT,
-      dataPAP,
+      dataSANEWS,
       dataTASS,
       dataTELEGRAPH,
       dataTHEJAPANTIMES,
       dataTHESYDNEYMORNINGHERALD,
+      dataYONHAPNEWSAGENCY,
     ])
   );
 }

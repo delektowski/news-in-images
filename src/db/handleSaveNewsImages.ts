@@ -21,7 +21,6 @@ export async function handleSaveNewsImages() {
 
 async function saveNewsImages(numberOfImages = 3) {
   const newsTitles = await getNewsTitles(numberOfImages);
-  console.log("newsTitles", newsTitles);
   let unsavedNews = 0;
   for (const newsTitle of newsTitles) {
     const imgData = await handleCreatePainting(newsTitle.title);

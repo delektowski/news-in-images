@@ -39,6 +39,9 @@ export async function getNewsTitles(
   await browser.close();
   logger.log("info", `News titles number: ${newsTitles.length}`, {
     function: "getNewsTitles()",
+  });  
+  logger.log("info", `News providers data number: ${newsProvidersData.length}`, {
+    function: "getNewsTitles()",
   });
   return newsTitles;
 }

@@ -2,14 +2,6 @@ import {NewsSelectorDataModel} from "../models/newsSelectorData.model";
 
 export let newsProvidersData: NewsSelectorDataModel[] = [];
 
-export const dataPAP = {
-    url: "https://www.pap.pl/en",
-    mainSelector: "h1",
-    subSelector: "a",
-    linkSelector: "a",
-    newsProvider: "PAP",
-    country: "pl",
-};
 
 export const dataNYT = {
     url: "https://www.nytimes.com/",
@@ -148,9 +140,33 @@ export const dataTHEJAPANTIMES = {
 };
 export const dataMEXICONEWSDAILY = {
     url: "https://mexiconewsdaily.com/",
-    mainSelector: ".wpb_wrapper",
+    mainSelector: "#td-outer-wrap",
     subSelector: "h3 a",
     linkSelector: "h3 a",
     newsProvider: "Mexico News Daily",
     country: "mx",
+};
+export const dataSANEWS = {
+    url: "https://www.sanews.gov.za//",
+    mainSelector: "article h2",
+    subSelector: "a span",
+    linkSelector: "a",
+    newsProvider: "SA News",
+    country: "za",
+};
+export const dataYONHAPNEWSAGENCY = {
+    url: "https://en.yna.co.kr/",
+    mainSelector: "article.top-news-zone",
+    subSelector: "h1",
+    linkSelector: "h1 a",
+    newsProvider: "Yonhap News Agency",
+    country: "kr",
+};
+export const dataDAILYSABAH = {
+    url: "https://www.dailysabah.com//",
+    mainSelector: ".main_banner",
+    subSelector: "h3",
+    linkSelector: "h3 a",
+    newsProvider: "Daily Sabah",
+    country: "kr",
 };
