@@ -11,15 +11,15 @@ export async function handleSaveNewsImages() {
   const moreThanHalfHour = 3570000;
   setInterval(async () => {
     if (dayjs().hour() === 7) {
-      if (newsProvidersData.length <= 3) {
-        refreshNewsProvidersData();
-      }
       await saveNewsImages(3);
     }
   }, moreThanHalfHour);
 }
 
 async function saveNewsImages(numberOfImages = 3) {
+  if (newsProvidersData.length <= 1) {
+    refreshNewsProvidersData();
+  }
   const newsTitles = await getNewsTitles(numberOfImages);
   let unsavedNews = 0;
   for (const newsTitle of newsTitles) {
