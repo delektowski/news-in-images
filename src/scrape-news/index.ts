@@ -17,7 +17,7 @@ export async function getNewsTitles(
     currentNewsNumber <= newsDataNumber;
     currentNewsNumber++
   ) {
-    if(newsProvidersData.length <= 1) {
+    if(newsProvidersData.length <= 3) {
       refreshNewsProvidersData();
     }
 

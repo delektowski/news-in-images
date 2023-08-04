@@ -17,8 +17,22 @@ export async function handleSaveNewsImages() {
 }
 
 async function saveNewsImages(numberOfImages = 3) {
-  if (newsProvidersData.length <= 1) {
+  if (newsProvidersData.length <= 3) {
+    logger.log(
+        "info",
+        `newsProvidersData on ${dayjs().hour()} items number: ${JSON.stringify(newsProvidersData)}`,
+        {
+          function: "handleSaveNewsImages()",
+        }
+    );
     refreshNewsProvidersData();
+    logger.log(
+        "info",
+        `After refresh newsProvidersData on ${dayjs().hour()} items number: ${newsProvidersData.length}`,
+        {
+          function: "handleSaveNewsImages()",
+        }
+    );
   }
   const newsTitles = await getNewsTitles(numberOfImages);
   let unsavedNews = 0;
@@ -33,8 +47,7 @@ async function saveNewsImages(numberOfImages = 3) {
         imgData,
         newsTitle.link
       );
-    }
-    if (imgData === undefined) {
+    } else {
       unsavedNews++;
     }
   }
