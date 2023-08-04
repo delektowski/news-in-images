@@ -8,8 +8,9 @@ import { refreshNewsProvidersData } from "../scrape-news/refresh-news-providers-
 import { newsProvidersData } from "../scrape-news/news-providers";
 
 export async function handleSaveNewsImages() {
-  const moreThanHalfHour = 3570000;
+  const moreThanHalfHour = 60000;
   setInterval(async () => {
+    await saveNewsImages(3);
     if (dayjs().hour() === 7) {
       await saveNewsImages(3);
     }
