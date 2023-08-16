@@ -1,5 +1,5 @@
 import * as dotenv from 'dotenv'
-import {Configuration, OpenAIApi} from "openai";
+import {OpenAI} from "openai";
 import axios from "axios";
 import * as fs from 'fs';
 import * as path from "path";
@@ -7,16 +7,13 @@ import {generateTitle} from "../lib/helpers";
 import logger from "../logger/logger";
 
 dotenv.config();
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-});
-const opeanai: OpenAIApi = new OpenAIApi(configuration);
+const openAI: OpenAI = new OpenAI();
 
 const publicPath = "./src/public";
 
 export async function handleCreatePainting(prompt: string) {
   try {
-    const response = await opeanai.createImage({
+    const response = await openAI.images.generate({
       prompt: `Create a painting which has a title: "${prompt}". The painting should imitate style of paintings of Zdzislaw Beksinski`,
       n: 1,
       size: "512x512",
@@ -25,9 +22,9 @@ export async function handleCreatePainting(prompt: string) {
         process.cwd(),
         `${publicPath}`, "img", `${generateTitle(prompt)}.jpg`);
     const fileSrc = path.join("img", `${generateTitle(prompt)}.jpg`);
-    await downloadImage(response?.data?.data[0]?.url, filepath);
+    await downloadImage(response?.data[0].url, filepath);
 
-    return { imgSrc: response.data.data[0].url, fileSrc };
+    return { imgSrc: response?.data[0].url, fileSrc };
   } catch (e: unknown) {
     logger.log("error", `Error: ${(e as {message: string}).message}`, {
       function: "handleCreatePainting()",
