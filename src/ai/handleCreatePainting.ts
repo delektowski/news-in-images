@@ -7,7 +7,7 @@ import {generateTitle} from "../lib/helpers";
 import logger from "../logger/logger";
 
 dotenv.config();
-const openAI: OpenAI = new OpenAI();
+const openAI: OpenAI = new OpenAI({apiKey: process.env.OPENAI_API_KEY});
 
 const publicPath = "./src/public";
 
