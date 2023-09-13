@@ -14,7 +14,7 @@ const publicPath = "./src/public";
 export async function handleCreatePainting(prompt: string) {
   try {
     const response = await openAI.images.generate({
-      prompt: `Generate a hyper-realistic image inspired by the news headline: ${prompt}. The image should depict a scene or concept related to the news story, with a high level of detail, realism, and artistic interpretation. Feel free to use your creative freedom in generating this image.`,
+      prompt: `Generate a hyper-realistic image inspired by the news headline: ${prompt}. The image should be related to the news title, with a high level of detail, realism, and artistic interpretation in style of Salvador Dalí.`,
       n: 1,
       size: "512x512",
     });
