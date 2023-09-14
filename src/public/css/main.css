@@ -103,6 +103,15 @@ a, .a:hover, .a:visited, .a:focus, .a:active {
     font-size: .8rem;
 }
 
+.news-src > p {
+    margin-block-start: .9rem;
+}
+
+.country {
+    align-self: center;
+
+}
+
 @media screen and (max-width: 512px) {
     .main-container {
         margin-block-start: 0;

@@ -49,6 +49,7 @@
         const imageTitle = document.createElement("p");
         const newsSrcContainer = document.createElement("div");
         const newsSrcText = document.createElement("p");
+        const country = document.createElement("p");
         const newsSrcFlag = document.createElement("span");
         anchorTag.href = imageData.link;
         anchorTag.target = "_blank";
@@ -59,8 +60,11 @@
         imageTitle.innerText = imageData.title;
         imageTitle.classList.add("img-title");
         newsSrcContainer.classList.add("news-src");
+        country.classList.add("country");
+        country.innerText = setCountry(imageData.country);
         newsSrcFlag.classList.add("fi", `fi-${imageData.country}`);
         newsSrcText.innerText = imageData.newsProvider;
+        newsSrcContainer.append(country);
         newsSrcContainer.append(newsSrcFlag);
         newsSrcContainer.append(newsSrcText);
         imageContainer.append(image);
@@ -107,6 +111,32 @@
         let previousObserver = imagesContainers[imagesContainers.length - 2]
         observer.observe(currentObserver)
         previousObserver && observer.unobserve(previousObserver)
+    }
+
+    function setCountry(countryCode) {
+        const countries = {
+            'ar': 'Argentina',
+            'au': 'Australia',
+            'br': 'Brazil',
+            'ca': 'Canada',
+            'cn': 'China',
+            'fr': 'France',
+            'de': 'Germany',
+            'in': 'India',
+            'id': 'Indonesia',
+            'it': 'Italy',
+            'jp': 'Japan',
+            'kr': 'South Korea',
+            'mx': 'Mexico',
+            'ru': 'Russia',
+            'sa': 'Saudi Arabia',
+            'za': 'South Africa',
+            'tr': 'Turkey',
+            'gb': 'United Kingdom',
+            'us': 'United States',
+            'eu': 'European Union'
+        };
+        return countries[countryCode]
     }
 
     handleLazyLoadingImagesContainer();
