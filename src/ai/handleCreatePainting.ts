@@ -1,34 +1,66 @@
-import * as dotenv from 'dotenv'
-import {OpenAI} from "openai";
+import * as dotenv from "dotenv";
 import axios from "axios";
-import * as fs from 'fs';
+import * as fs from "fs";
 import * as path from "path";
-import {generateTitle} from "../lib/helpers";
+import {countries, generateTitle} from "../lib/helpers";
 import logger from "../logger/logger";
+import {CountriesCodes} from "../models/countries-codes.enum";
 
 dotenv.config();
-const openAI: OpenAI = new OpenAI({apiKey: process.env.OPENAI_API_KEY});
 
 const publicPath = "./src/public";
 
-export async function handleCreatePainting(prompt: string) {
+export async function handleCreatePainting(prompt: string, countryCode: CountriesCodes) {
   try {
-    const response = await openAI.images.generate({
-      prompt: `Generate a hyper-realistic image inspired by the news headline: ${prompt}. The image should be in style of Zdzislaw Beksinski paintings.`,
-      n: 1,
-      size: "512x512",
-    });
-    const filepath = path.join(
-        process.cwd(),
-        `${publicPath}`, "img", `${generateTitle(prompt)}.jpg`);
-    const fileSrc = path.join("img", `${generateTitle(prompt)}.jpg`);
-    await downloadImage(response?.data[0].url, filepath);
+    const data = {
+      key: process.env.STABLE_DIFFUSION_API_KEY,
+      prompt: `A hyper-realistic image inspired by the news headline: '${prompt}.' The image should depict a scene or concept related to the headline, with a high level of detail, realism  and artistic interpretation. Feel free to use your creative freedom in generating this image. The image should be influenced by the visual heritage of ${countries[countryCode]} country.`,
+      negative_prompt: "nude content, country flags, text, letters",
+      width: "512",
+      height: "512",
+      samples: "1",
+      num_inference_steps: "20",
+      seed: null,
+      guidance_scale: 7.5,
+      safety_checker: "yes",
+      multi_lingual: "no",
+      panorama: "no",
+      self_attention: "no",
+      upscale: "no",
+      embeddings_model: null,
+      webhook: null,
+      track_id: null,
+    };
 
-    return { imgSrc: response?.data[0].url, fileSrc };
+    const response = await axios.post(
+      "https://stablediffusionapi.com/api/v3/text2img",
+      data,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const filepath = path.join(
+      process.cwd(),
+      `${publicPath}`,
+      "img",
+      `${generateTitle(prompt)}.png`
+    );
+    const fileSrc = path.join("img", `${generateTitle(prompt)}.png`);
+    await downloadImage(response?.data?.output[0], filepath);
+
+    return { imgSrc: response?.data?.output[0], fileSrc };
   } catch (e: unknown) {
-    logger.log("error", `Error: ${(e as {message: string}).message}`, {
-      function: "handleCreatePainting()",
-    });
+    logger.log(
+      "error",
+      `Error: ${(e as { message: string }).message}
+        `,
+      {
+        function: "handleCreatePainting()",
+      }
+    );
   }
 }
 
@@ -47,6 +79,3 @@ async function downloadImage(url: string | undefined, filepath: string) {
       });
   });
 }
-
-
-

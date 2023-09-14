@@ -1,4 +1,5 @@
 import {NewsSelectorDataModel} from "../models/newsSelectorData.model";
+import {CountriesCodes} from "../models/countries-codes.enum";
 
 export let newsProvidersData: NewsSelectorDataModel[] = [];
 
@@ -9,7 +10,7 @@ export const dataNYT = {
     subSelector: "h3",
     linkSelector: "section a",
     newsProvider: "New York Times",
-    country: "us",
+    country: CountriesCodes.us,
 };
 
 export const dataTELEGRAPH = {
@@ -18,7 +19,7 @@ export const dataTELEGRAPH = {
     subSelector: "[data-test=list-headline-link] [data-test=headline] span",
     linkSelector: "[data-test=list-headline-link]",
     newsProvider: "The Telegraph",
-    country: "gb",
+    country: CountriesCodes.gb,
 };
 
 export const dataDEUTSCHEWELLE = {
@@ -27,7 +28,7 @@ export const dataDEUTSCHEWELLE = {
     subSelector: "h3",
     linkSelector: "a:nth-child(1)",
     newsProvider: "Deutsche Welle",
-    country: "de",
+    country: CountriesCodes.de,
 };
 
 export const dataLEMONDE = {
@@ -36,7 +37,7 @@ export const dataLEMONDE = {
     subSelector: "h1 > p",
     linkSelector: "a",
     newsProvider: "Le Monde",
-    country: "fr",
+    country: CountriesCodes.fr,
 };
 
 export const dataTASS = {
@@ -45,7 +46,7 @@ export const dataTASS = {
     subSelector: "h1 > span",
     linkSelector: "a",
     newsProvider: "TASS",
-    country: "ru",
+    country: CountriesCodes.ru,
 };
 
 export const dataCHINADAILY = {
@@ -54,7 +55,7 @@ export const dataCHINADAILY = {
     subSelector: "h2 > a",
     linkSelector: "h2 > a",
     newsProvider: "China Daily",
-    country: "cn",
+    country: CountriesCodes.cn,
 };
 
 export const dataHINDUSTANTIMES = {
@@ -63,7 +64,7 @@ export const dataHINDUSTANTIMES = {
     subSelector: "h3 > a",
     linkSelector: "h3 > a",
     newsProvider: "Hindustan Times",
-    country: "in",
+    country: CountriesCodes.in,
 };
 
 export const dataARABNEWS = {
@@ -72,7 +73,7 @@ export const dataARABNEWS = {
     subSelector: "h1",
     linkSelector: "h1 > a",
     newsProvider: "Arab News",
-    country: "sa",
+    country: CountriesCodes.sa,
 };
 export const dataBATIMES = {
     url: "https://www.batimes.com.ar/",
@@ -80,7 +81,7 @@ export const dataBATIMES = {
     subSelector: "h1",
     linkSelector: "article > a",
     newsProvider: "Buenos Aires Times",
-    country: "ar",
+    country: CountriesCodes.ar,
 };
 export const dataTHESYDNEYMORNINGHERALD = {
     url: "https://www.smh.com.au/",
@@ -88,7 +89,7 @@ export const dataTHESYDNEYMORNINGHERALD = {
     subSelector: "[data-pb-type=hl] [data-testid=article-link]",
     linkSelector: "[data-pb-type=hl] [data-testid=article-link]",
     newsProvider: "The Sydney Morning Herald",
-    country: "au",
+    country: CountriesCodes.au,
 };
 export const dataFOLHADESPAULO = {
     url: "https://www1.folha.uol.com.br/internacional/en/",
@@ -96,7 +97,7 @@ export const dataFOLHADESPAULO = {
     subSelector: "a h2",
     linkSelector: "a.c-main-headline__url",
     newsProvider: "Folha De S.Paulo",
-    country: "br",
+    country: CountriesCodes.br,
 };
 export const dataCTVNEWS = {
     url: "https://www.ctvnews.ca/",
@@ -104,7 +105,7 @@ export const dataCTVNEWS = {
     subSelector: "h3",
     linkSelector: "a",
     newsProvider: "CTV News",
-    country: "ca",
+    country: CountriesCodes.ca,
 };
 export const dataEUOBSERVER = {
     url: "https://euobserver.com/",
@@ -112,7 +113,7 @@ export const dataEUOBSERVER = {
     subSelector: "h1 > a",
     linkSelector: "h1 > a",
     newsProvider: "EU Observer",
-    country: "eu",
+    country: CountriesCodes.eu,
 };
 export const dataANTARANEWS = {
     url: "https://en.antaranews.com/",
@@ -120,7 +121,7 @@ export const dataANTARANEWS = {
     subSelector: "article:first-child h3 a",
     linkSelector: "article:first-child h3 a",
     newsProvider: "Antara News",
-    country: "id",
+    country: CountriesCodes.id,
 };
 export const dataANSA = {
     url: "https://www.ansa.it/english/",
@@ -128,7 +129,7 @@ export const dataANSA = {
     subSelector: "h3 a",
     linkSelector: "h3 a",
     newsProvider: "Ansa",
-    country: "it",
+    country: CountriesCodes.it,
 };
 export const dataTHEJAPANTIMES = {
     url: "https://www.japantimes.co.jp/",
@@ -136,7 +137,7 @@ export const dataTHEJAPANTIMES = {
     subSelector: "a hgroup p",
     linkSelector: "a",
     newsProvider: "The Japan Times",
-    country: "jp",
+    country: CountriesCodes.jp,
 };
 export const dataMEXICONEWSDAILY = {
     url: "https://mexiconewsdaily.com/",
@@ -144,7 +145,7 @@ export const dataMEXICONEWSDAILY = {
     subSelector: "h3 a",
     linkSelector: "h3 a",
     newsProvider: "Mexico News Daily",
-    country: "mx",
+    country: CountriesCodes.mx,
 };
 export const dataSANEWS = {
     url: "https://www.sanews.gov.za//",
@@ -152,7 +153,7 @@ export const dataSANEWS = {
     subSelector: "a span",
     linkSelector: "a",
     newsProvider: "SA News",
-    country: "za",
+    country: CountriesCodes.za,
 };
 export const dataYONHAPNEWSAGENCY = {
     url: "https://en.yna.co.kr/",
@@ -160,13 +161,13 @@ export const dataYONHAPNEWSAGENCY = {
     subSelector: "h1",
     linkSelector: "h1 a",
     newsProvider: "Yonhap News Agency",
-    country: "kr",
+    country: CountriesCodes.kr,
 };
 export const dataDAILYSABAH = {
-    url: "https://www.dailysabah.com//",
+    url: "https://www.dailysabah.com/",
     mainSelector: ".main_banner",
     subSelector: "h3",
     linkSelector: "h3 a",
     newsProvider: "Daily Sabah",
-    country: "kr",
+    country: CountriesCodes.tr,
 };

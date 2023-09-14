@@ -4,7 +4,7 @@ import { NewsSelectorDataModel } from "../models/newsSelectorData.model";
 
 export function generateTitle(prompt: string): string {
   return prompt
-    .replace(/[^a-zA-Z0-9\s\-/]/g, '')
+    .replace(/[^a-zA-Z0-9\s\-/]/g, "")
     .split(" ")
     .splice(0, 5)
     .join("-")
@@ -37,4 +37,27 @@ export const shuffleArrayOrder = (
     .map((value: NewsSelectorDataModel) => ({ value, sort: Math.random() }))
     .sort((a: { sort: number }, b: { sort: number }) => a.sort - b.sort)
     .map(({ value }) => value);
+};
+
+export const countries = {
+  ar: "Argentina",
+  au: "Australia",
+  br: "Brazil",
+  ca: "Canada",
+  cn: "China",
+  fr: "France",
+  de: "Germany",
+  in: "India",
+  id: "Indonesia",
+  it: "Italy",
+  jp: "Japan",
+  kr: "South Korea",
+  mx: "Mexico",
+  ru: "Russia",
+  sa: "Saudi Arabia",
+  za: "South Africa",
+  tr: "Turkey",
+  gb: "United Kingdom",
+  us: "United States",
+  eu: "European Union",
 };

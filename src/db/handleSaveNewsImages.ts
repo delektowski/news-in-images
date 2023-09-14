@@ -11,7 +11,7 @@ export async function handleSaveNewsImages() {
   const moreThanHalfHour = 3570000;
   setInterval(async () => {
     if (dayjs().hour() === 7) {
-      await saveNewsImages(3);
+      await saveNewsImages(9);
     }
   }, moreThanHalfHour);
 }
@@ -37,7 +37,7 @@ async function saveNewsImages(numberOfImages = 3) {
   const newsTitles = await getNewsTitles(numberOfImages);
   let unsavedNews = 0;
   for (const newsTitle of newsTitles) {
-    const imgData = await handleCreatePainting(newsTitle.title);
+    const imgData = await handleCreatePainting(newsTitle.title, newsTitle.country);
     if (imgData) {
       await saveImgDataToDb(
         newsTitle.title,
