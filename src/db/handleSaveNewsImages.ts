@@ -6,38 +6,46 @@ import * as dayjs from "dayjs";
 import logger from "../logger/logger";
 import { refreshNewsProvidersData } from "../scrape-news/refresh-news-providers-data";
 import { newsProvidersData } from "../scrape-news/news-providers";
+import { NewsTitlesModel } from "../scrape-news/models/news-titles.model";
+import { PromptStyle } from "../models/prompt-style.enum";
 
 export async function handleSaveNewsImages() {
   const moreThanHalfHour = 3570000;
+  await handleNewsTitles(3);
   setInterval(async () => {
     if (dayjs().hour() === 7) {
-      await saveNewsImages(9);
+      await handleNewsTitles(6);
     }
   }, moreThanHalfHour);
 }
 
-async function saveNewsImages(numberOfImages = 3) {
+async function handleNewsTitles(numberOfImages: number) {
   if (newsProvidersData.length <= 3) {
-    logger.log(
-        "info",
-        `newsProvidersData on ${dayjs().hour()} items number: ${JSON.stringify(newsProvidersData)}`,
-        {
-          function: "handleSaveNewsImages()",
-        }
-    );
     refreshNewsProvidersData();
-    logger.log(
-        "info",
-        `After refresh newsProvidersData on ${dayjs().hour()} items number: ${newsProvidersData.length}`,
-        {
-          function: "handleSaveNewsImages()",
-        }
-    );
   }
   const newsTitles = await getNewsTitles(numberOfImages);
+
+  if (newsTitles.length === numberOfImages) {
+    await saveNewsImages(newsTitles, PromptStyle.REGULAR);
+    await saveNewsImages(newsTitles, PromptStyle.BEKSINSKI);
+    await saveNewsImages(newsTitles, PromptStyle.DALI);
+  } else {
+    await handleNewsTitles(numberOfImages);
+  }
+}
+
+async function saveNewsImages(
+  newsTitles: NewsTitlesModel[],
+  promptStyle: PromptStyle
+) {
   let unsavedNews = 0;
+  const notRecordedNews: NewsTitlesModel[] = [];
   for (const newsTitle of newsTitles) {
-    const imgData = await handleCreatePainting(newsTitle.title, newsTitle.country);
+    const imgData = await handleCreatePainting(
+      newsTitle.title,
+      newsTitle.country,
+      promptStyle
+    );
     if (imgData) {
       await saveImgDataToDb(
         newsTitle.title,
@@ -48,7 +56,7 @@ async function saveNewsImages(numberOfImages = 3) {
         newsTitle.link
       );
     } else {
-      unsavedNews++;
+      notRecordedNews.push(newsTitle);
     }
   }
   logger.log(
@@ -58,7 +66,9 @@ async function saveNewsImages(numberOfImages = 3) {
       function: "handleSaveNewsImages()",
     }
   );
-  if (unsavedNews > 0) {
-    await saveNewsImages(unsavedNews);
+  if (notRecordedNews.length > 0) {
+    setTimeout(async () => {
+      await saveNewsImages(notRecordedNews, promptStyle);
+    }, 5001);
   }
 }
