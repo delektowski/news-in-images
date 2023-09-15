@@ -88,10 +88,10 @@ function handlePrompt(
   promptStyle: PromptStyle
 ): string {
   if (promptStyle === PromptStyle.BEKSINSKI) {
-    return `A hyper-realistic image inspired by the news headline: '${headlineTitle}.' The image should depict a scene or concept related to the headline, with a high level of detail, realism  and artistic interpretation. The image should be in style of Zdzislaw Beksinski paintings. The image should be influenced by the visual heritage of ${countries[countryCode]} country.`;
+    return `A hyper-realistic and depressing image in style of Zdzislaw Beksinski paintings, inspired by the news headline: '${headlineTitle}.' The image should depict a scene or concept related to the headline, with a high level of detail, realism  and artistic interpretation. In the image should be visible the influence of the visual heritage of ${countries[countryCode]} country.`;
   }
   if (promptStyle === PromptStyle.DALI) {
-    return `A hyper-realistic image inspired by the news headline: '${headlineTitle}.' The image should depict a scene or concept related to the headline, with a high level of detail, realism  and artistic interpretation. Feel free to use your creative freedom in generating this image. The image should be influenced by the visual heritage of ${countries[countryCode]} country.`;
+    return `A hyper-realistic and surrealistic image in style of Salvador Dalí or Maurits Cornelis Escher, inspired by the news headline: '${headlineTitle}.' The image should depict a scene or concept related to the headline, with a high level of detail, realism  and artistic interpretation. In the image should be visible the influence of the visual heritage of ${countries[countryCode]} country.`;
   }
-  return `A hyper-realistic image inspired by the news headline: '${headlineTitle}.' The image should depict a scene or concept related to the headline, with a high level of detail, realism  and artistic interpretation. Feel free to use your creative freedom in generating this image. The image should be influenced by the visual heritage of ${countries[countryCode]} country.`;
+  return `A hyper-realistic image inspired by the news headline: '${headlineTitle}.' The image should depict a scene or concept related to the headline, with a high level of detail, realism  and artistic interpretation. Feel free to use your creative freedom in generating this image. In the image should be visible the influence of the visual heritage of ${countries[countryCode]} country.`;
 }

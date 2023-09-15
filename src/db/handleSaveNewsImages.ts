@@ -11,7 +11,7 @@ import { PromptStyle } from "../models/prompt-style.enum";
 
 export async function handleSaveNewsImages() {
   const moreThanHalfHour = 3570000;
-  await handleNewsTitles(3);
+  await handleNewsTitles(6);
   setInterval(async () => {
     if (dayjs().hour() === 7) {
       await handleNewsTitles(6);
