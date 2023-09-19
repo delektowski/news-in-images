@@ -11,7 +11,6 @@ import { PromptStyle } from "../models/prompt-style.enum";
 
 export async function handleSaveNewsImages() {
   const moreThanHalfHour = 3570000;
-  await handleNewsTitles(6);
   setInterval(async () => {
     if (dayjs().hour() === 7) {
       await handleNewsTitles(6);
@@ -26,25 +25,20 @@ async function handleNewsTitles(numberOfImages: number) {
   const newsTitles = await getNewsTitles(numberOfImages);
 
   if (newsTitles.length === numberOfImages) {
-    await saveNewsImages(newsTitles, PromptStyle.REGULAR);
-    await saveNewsImages(newsTitles, PromptStyle.BEKSINSKI);
-    await saveNewsImages(newsTitles, PromptStyle.DALI);
+    await saveNewsImages(newsTitles);
   } else {
     await handleNewsTitles(numberOfImages);
   }
 }
 
-async function saveNewsImages(
-  newsTitles: NewsTitlesModel[],
-  promptStyle: PromptStyle
-) {
+async function saveNewsImages(newsTitles: NewsTitlesModel[]) {
   let unsavedNews = 0;
   const notRecordedNews: NewsTitlesModel[] = [];
-  for (const newsTitle of newsTitles) {
+  for (const [index, newsTitle] of newsTitles.entries()) {
     const imgData = await handleCreatePainting(
       newsTitle.title,
       newsTitle.country,
-      promptStyle
+      index === 2 || index === 5 ? PromptStyle.BEKSINSKI : PromptStyle.REGULAR
     );
     if (imgData) {
       await saveImgDataToDb(
@@ -68,7 +62,7 @@ async function saveNewsImages(
   );
   if (notRecordedNews.length > 0) {
     setTimeout(async () => {
-      await saveNewsImages(notRecordedNews, promptStyle);
+      await saveNewsImages(notRecordedNews);
     }, 5001);
   }
 }
