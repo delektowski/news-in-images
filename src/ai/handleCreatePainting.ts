@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 import axios from "axios";
 import * as fs from "fs";
 import * as path from "path";
-import { countries, generateTitle } from "../lib/helpers";
+import { generateTitle } from "../lib/helpers";
 import logger from "../logger/logger";
 import { CountriesCodes } from "../models/countries-codes.enum";
 import { PromptStyle } from "../models/prompt-style.enum";
@@ -88,7 +88,7 @@ function handlePrompt(
   promptStyle: PromptStyle
 ): string {
   if (promptStyle === PromptStyle.BEKSINSKI) {
-    return `A hyper-realistic and depressing image in style of Zdzislaw Beksinski paintings, inspired by the news headline: '${headlineTitle}.' The image should depict a scene or concept related to the headline, with a high level of detail, realism  and artistic interpretation.`;
+    return `A hyper-realistic image in style of Zdzislaw Beksinski paintings, inspired by the news headline: '${headlineTitle}.' The image should depict a scene or concept related to the headline, with a high level of detail, realism.`;
   }
   return `A hyper-realistic image inspired by the news headline: '${headlineTitle}.' The image should depict a scene or concept related to the headline, with a high level of detail, realism  and artistic interpretation. Feel free to use your creative freedom in generating this image.`;
 }
