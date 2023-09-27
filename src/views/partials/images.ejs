@@ -2,13 +2,8 @@
 
 <script>
 
-    const options = {
-        root: null,
-        rootMargin: '600px',
-        threshold: 1.0
-    }
     let daysBefore = 0;
-    let observer = new IntersectionObserver(intersectionObserverCallback, options);
+    let observer = new IntersectionObserver(intersectionObserverCallback);
 
     function intersectionObserverCallback(entries) {
         entries.forEach((entry) => {
