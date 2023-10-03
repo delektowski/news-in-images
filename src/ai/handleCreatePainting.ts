@@ -20,6 +20,7 @@ export async function handleCreatePainting(
     const data = {
       key: process.env.STABLE_DIFFUSION_API_KEY,
       prompt: handlePrompt(headlineTitle, countryCode, promptStyle),
+      negative_prompt: "naked content, NSFW",
       width: "512",
       height: "512",
       samples: "1",
