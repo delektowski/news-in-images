@@ -27,7 +27,7 @@ export async function handleCreatePainting(
       num_inference_steps: "20",
       seed: null,
       guidance_scale: 7.5,
-      safety_checker: "yes",
+      safety_checker: "no",
       multi_lingual: "no",
       panorama: "no",
       self_attention: "no",
