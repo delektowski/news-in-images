@@ -31,7 +31,7 @@ async function handleNewsTitles(numberOfImages: number) {
   }
 }
 
-async function saveNewsImages(newsTitles: NewsTitlesModel[]) {
+async function saveNewsImages(newsTitles: NewsTitlesModel[], numberOfTry = 0) {
   let unsavedNews = 0;
   const notRecordedNews: NewsTitlesModel[] = [];
   for (const [index, newsTitle] of newsTitles.entries()) {
@@ -51,6 +51,13 @@ async function saveNewsImages(newsTitles: NewsTitlesModel[]) {
       );
     } else {
       notRecordedNews.push(newsTitle);
+      logger.log(
+        "info",
+        `Not created news title ${newsTitle.title} on time: ${dayjs()}`,
+        {
+          function: "handleSaveNewsImages()",
+        }
+      );
     }
   }
   logger.log(
@@ -60,9 +67,9 @@ async function saveNewsImages(newsTitles: NewsTitlesModel[]) {
       function: "handleSaveNewsImages()",
     }
   );
-  if (notRecordedNews.length > 0) {
+  if (notRecordedNews.length > 0 && numberOfTry <= 20) {
     setTimeout(async () => {
-      await saveNewsImages(notRecordedNews);
+      await saveNewsImages(notRecordedNews, numberOfTry++);
     }, 5001);
   }
 }
